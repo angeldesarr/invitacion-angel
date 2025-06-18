@@ -1,135 +1,86 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Graduación de Ángel</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Graduación Ángel Pérez Santos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Montserrat&display=swap" rel="stylesheet">
   <style>
-    body {
-      margin: 0;
-      font-family: 'Playfair Display', serif;
-      background: #111;
-      color: gold;
-      text-align: center;
-      padding: 2rem;
-    }
-
-    h1 {
-      font-size: 3rem;
-      margin-top: 1rem;
-    }
-
-    .countdown {
-      font-size: 2rem;
-      margin: 2rem 0;
-    }
-
-    iframe {
-      border: 0;
-      width: 100%;
-      max-width: 600px;
-      height: 300px;
-      margin-top: 2rem;
-    }
-
-    input, button {
-      padding: 0.5rem;
-      margin: 0.5rem;
-      font-size: 1rem;
-      border-radius: 5px;
-      border: none;
-    }
-
-    #rsvp-table {
-      margin-top: 2rem;
-      color: white;
-      border-collapse: collapse;
-      width: 100%;
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    #rsvp-table td, #rsvp-table th {
-      border: 1px solid gold;
-      padding: 8px;
-    }
+    body { margin:0; font-family:'Montserrat', sans-serif; background:#070707; color:#f5f5f5; }
+    .container { max-width:800px; margin:auto; padding:1rem; text-align:center; }
+    h1 { font-family:'Playfair Display', serif; font-size:3rem; color:#e0b84f; }
+    .countdown { font-size:2rem; margin:1rem 0; }
+    #music-btn { margin:1rem; padding:.5rem 1rem; font-size:1rem; background:#e0b84f; border:none; border-radius:5px; cursor:pointer; }
+    iframe.map { width:100%; height:300px; border:none; margin:1rem 0; border-radius:10px; }
+    .gallery { display:grid; grid-template-columns:repeat(auto-fit, minmax(180px,1fr)); gap:10px; margin:1rem 0; }
+    .gallery img { width:100%; height:auto; border-radius:8px; }
+    input,button { padding:.5rem; margin:.5rem; font-size:1rem; border-radius:5px; border:none; }
+    #rsvp-table { width:100%; border-collapse:collapse; margin-top:1rem; }
+    #rsvp-table th, td { border:1px solid #e0b84f; padding:.5rem; color:#f5f5f5; }
+    footer { margin:2rem 0; font-size:0.9rem; color:#888; }
   </style>
 </head>
 <body>
-  <h1>Invitación a mi Graduación</h1>
-  <p>Soy Ángel Pérez Santos y me encantaría que me acompañes en este día tan especial.</p>
-  <p><strong>Fecha:</strong> 1 de agosto</p>
+  <div class="container">
+    <h1>Graduación de Ángel Pérez Santos</h1>
+    <div class="countdown" id="countdown">Cargando...</div>
 
-  <div class="countdown" id="countdown">Cargando cuenta regresiva...</div>
+    <button id="music-btn">🎵 Activar música de fondo</button>
+    <audio id="bg-music" loop>
+      <source src="https://www.bensound.com/bensound-music/bensound-sunny.mp3" type="audio/mp3">
+    </audio>
 
-  <h2>Confirma tu asistencia</h2>
-  <input type="text" id="nombre" placeholder="Tu nombre" />
-  <button onclick="confirmar()">Confirmar</button>
+    <h2>Ubicación del evento</h2>
+    <iframe class="map" src="https://www.google.com/maps/embed/v1/place?key=TU_GOOGLE_MAPS_EMBED_KEY&q=Av.+de+los+Fresnos+72778+Cholula+Puebla" allowfullscreen></iframe>
 
-  <table id="rsvp-table">
-    <thead>
-      <tr><th>Nombre</th></tr>
-    </thead>
-    <tbody id="tabla-asistencia">
-      <!-- Confirmaciones aparecerán aquí -->
-    </tbody>
-  </table>
+    <h2>Galería</h2>
+    <div class="gallery">
+      <img src="https://sites.google.com/view/mi-graduacion2024/_/rsrc/..." alt="Imagen 1">
+      <img src="https://sites.google.com/view/mi-graduacion2024/_/rsrc/..." alt="Imagen 2">
+      <img src="https://sites.google.com/view/mi-graduacion2024/_/rsrc/..." alt="Imagen 3">
+      <img src="https://sites.google.com/view/mi-graduacion2024/_/rsrc/..." alt="Imagen 4">
+    </div>
 
-  <h2>Ubicación del evento</h2>
-  <iframe 
-    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.573752964296!2d-99.1332086!3d19.4270256!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f92b8fdd9e1d%3A0xc1f8b9ad3f3f305!2sPalacio%20de%20Bellas%20Artes!5e0!3m2!1ses-419!2smx!4v1700000000000!5m2!1ses-419!2smx"
-    allowfullscreen=""
-    loading="lazy">
-  </iframe>
+    <h2>Confirma tu asistencia</h2>
+    <input type="text" id="nombre" placeholder="Tu nombre">
+    <button onclick="confirmar()">Confirmar</button>
+    <table id="rsvp-table"><thead><tr><th>Nombre</th></tr></thead><tbody id="tabla-asistencia"></tbody></table>
 
-  <audio id="bg-music" autoplay loop>
-    <source src="https://www.bensound.com/bensound-music/bensound-sunny.mp3" type="audio/mp3" />
-    Tu navegador no soporta música automática.
-  </audio>
+    <footer>¡Gracias por acompañarme en este momento tan especial! 🎓</footer>
+  </div>
 
   <script>
-    // 🎉 Cuenta regresiva
-    const countdown = document.getElementById('countdown');
-    const targetDate = new Date('2025-08-01T00:00:00');
+    const countdownEl = document.getElementById('countdown');
+    const target = new Date('2025-08-01T00:00:00');
 
-    function actualizarCuenta() {
-      const ahora = new Date();
-      const diferencia = targetDate - ahora;
-
-      if (diferencia <= 0) {
-        countdown.textContent = "¡Hoy es el gran día!";
-        return;
-      }
-
-      const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
-      const horas = Math.floor((diferencia / (1000 * 60 * 60)) % 24);
-      const minutos = Math.floor((diferencia / (1000 * 60)) % 60);
-      const segundos = Math.floor((diferencia / 1000) % 60);
-
-      countdown.textContent = `${dias}d ${horas}h ${minutos}m ${segundos}s`;
+    function updateCountdown() {
+      const diff = target - new Date();
+      if (diff <= 0) { countdownEl.textContent = '¡Hoy es el gran día!'; return; }
+      const d = Math.floor(diff / 86400000),
+            h = Math.floor(diff % 86400000 / 3600000),
+            m = Math.floor(diff % 3600000 / 60000),
+            s = Math.floor(diff % 60000 / 1000);
+      countdownEl.textContent = `${d}d ${h}h ${m}m ${s}s`;
     }
+    setInterval(updateCountdown,1000);
+    updateCountdown();
 
-    setInterval(actualizarCuenta, 1000);
-    actualizarCuenta();
+    const music = document.getElementById('bg-music');
+    document.getElementById('music-btn').onclick = () => {
+      music.volume = 0.3;
+      music.play();
+      document.getElementById('music-btn').style.display = 'none';
+    };
 
-    // ✅ Confirmaciones
     const lista = [];
-
     function confirmar() {
-      const nombre = document.getElementById('nombre').value.trim();
-      if (nombre === '') return;
-
-      lista.push(nombre);
-      const fila = document.createElement('tr');
-      fila.innerHTML = `<td>${nombre}</td>`;
-      document.getElementById('tabla-asistencia').appendChild(fila);
-      document.getElementById('nombre').value = '';
+      const n = document.getElementById('nombre').value.trim();
+      if (!n) return;
+      lista.push(n);
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td>${n}</td>`;
+      document.getElementById('tabla-asistencia').appendChild(tr);
+      document.getElementById('nombre').value='';
     }
-
-    // 🎵 Música
-    document.getElementById('bg-music').volume = 0.3;
   </script>
 </body>
 </html>
