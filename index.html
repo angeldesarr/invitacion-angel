@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>Graduación Ángel Pérez Santos</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Montserrat&display=swap" rel="stylesheet">
   <style>
@@ -30,14 +31,14 @@
     </audio>
 
     <h2>Ubicación del evento</h2>
-    <iframe class="map" src="https://www.google.com/maps/embed/v1/place?key=TU_GOOGLE_MAPS_EMBED_KEY&q=Av.+de+los+Fresnos+72778+Cholula+Puebla" allowfullscreen></iframe>
+    <iframe class="map" src="https://www.google.com/maps?q=Av.+de+los+Fresnos+72778+Cholula+Puebla&output=embed" allowfullscreen></iframe>
 
     <h2>Galería</h2>
     <div class="gallery">
-      <img src="https://sites.google.com/view/mi-graduacion2024/_/rsrc/..." alt="Imagen 1">
-      <img src="https://sites.google.com/view/mi-graduacion2024/_/rsrc/..." alt="Imagen 2">
-      <img src="https://sites.google.com/view/mi-graduacion2024/_/rsrc/..." alt="Imagen 3">
-      <img src="https://sites.google.com/view/mi-graduacion2024/_/rsrc/..." alt="Imagen 4">
+      <img src="https://sites.google.com/view/mi-graduacion2024/_/rsrc/1718143780953/inicio/20240614_222902.jpg" alt="Imagen 1">
+      <img src="https://sites.google.com/view/mi-graduacion2024/_/rsrc/1718143817389/inicio/20240614_223041.jpg" alt="Imagen 2">
+      <img src="https://sites.google.com/view/mi-graduacion2024/_/rsrc/1718143855806/inicio/20240614_223114.jpg" alt="Imagen 3">
+      <img src="https://sites.google.com/view/mi-graduacion2024/_/rsrc/1718143883961/inicio/20240614_223222.jpg" alt="Imagen 4">
     </div>
 
     <h2>Confirma tu asistencia</h2>
@@ -80,6 +81,7 @@
       tr.innerHTML = `<td>${n}</td>`;
       document.getElementById('tabla-asistencia').appendChild(tr);
       document.getElementById('nombre').value='';
+      window.open(`https://wa.me/5212218095921?text=Hola%2C%20soy%20${encodeURIComponent(n)}%20y%20nos%20vemos%20en%20tu%20fiesta!`, '_blank');
     }
   </script>
 </body>
