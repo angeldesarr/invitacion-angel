@@ -1,174 +1,66 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <title>Graduación Ángel Pérez Santos</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Montserrat&display=swap" rel="stylesheet">
-  <style>
-    body { margin:0; font-family:'Montserrat', sans-serif; background:#070707; color:#f5f5f5; }
-    .container { max-width:800px; margin:auto; padding:1rem; text-align:center; }
-    h1 { font-family:'Playfair Display', serif; font-size:3rem; color:#e0b84f; }
-    .countdown { font-size:2rem; margin:1rem 0; }
-    #music-btn { margin:1rem; padding:.5rem 1rem; font-size:1rem; background:#e0b84f; border:none; border-radius:5px; cursor:pointer; }
-    iframe.map { width:100%; height:300px; border:none; margin:1rem 0; border-radius:10px; }
-    .gallery { display:grid; grid-template-columns:repeat(auto-fit, minmax(180px,1fr)); gap:10px; margin:1rem 0; }
-    .gallery img { width:100%; height:auto; border-radius:8px; }
-    input,button { padding:.5rem; margin:.5rem; font-size:1rem; border-radius:5px; border:none; }
-    #rsvp-table { width:100%; border-collapse:collapse; margin-top:1rem; }
-    #rsvp-table th, td { border:1px solid #e0b84f; padding:.5rem; color:#f5f5f5; }
-    footer { margin:2rem 0; font-size:0.9rem; color:#888; }
-  </style>
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-<style>
-  #particles-js {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background: #070707;
-    z-index: -1;
-    top: 0;
-    left: 0;
-  }
-</style>
-
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div id="particles-js"></div>
   <div class="container">
     <h1>Graduación de Ángel Pérez Santos</h1>
     <div class="countdown" id="countdown">Cargando...</div>
-
     <button id="music-btn">🎵 Activar música de fondo</button>
     <audio id="bg-music" loop>
-      <source src="https://www.bensound.com/bensound-music/bensound-sunny.mp3" type="audio/mp3">
+      <source src="https://www.bensound.com/bensound-music/bensound-sunny.mp3" type="audio/mp3" />
     </audio>
 
     <h2>Ubicación del evento</h2>
-    <iframe class="map" src="https://www.google.com/maps?q=Av.+de+los+Fresnos+72778+Cholula+Puebla&output=embed" allowfullscreen></iframe>
+    <iframe class="map" 
+      src="https://www.google.com/maps?q=Av.+de+los+Fresnos,+72778,+Cholula+de+Rivadavia,+Pue.&output=embed"
+      allowfullscreen></iframe>
 
     <h2>Galería</h2>
     <div class="gallery">
-      <img src="https://sites.google.com/view/mi-graduacion2024/_/rsrc/1718143780953/inicio/20240614_222902.jpg" alt="Imagen 1">
-      <img src="https://sites.google.com/view/mi-graduacion2024/_/rsrc/1718143817389/inicio/20240614_223041.jpg" alt="Imagen 2">
-      <img src="https://sites.google.com/view/mi-graduacion2024/_/rsrc/1718143855806/inicio/20240614_223114.jpg" alt="Imagen 3">
-      <img src="https://sites.google.com/view/mi-graduacion2024/_/rsrc/1718143883961/inicio/20240614_223222.jpg" alt="Imagen 4">
+      <img src="img/img1.jpg" alt="Imagen 1">
+      <img src="img/img2.jpg" alt="Imagen 2">
+      <img src="img/img3.jpg" alt="Imagen 3">
+      <img src="img/img4.jpg" alt="Imagen 4">
     </div>
 
-    <h2>Confirma tu asistencia</h2>
-    <input type="text" id="nombre" placeholder="Tu nombre">
-    <button onclick="confirmar()">Confirmar</button>
-    <table id="rsvp-table"><thead><tr><th>Nombre</th></tr></thead><tbody id="tabla-asistencia"></tbody></table>
+    <div class="rsvp-section">
+      <h2>Confirma tu asistencia</h2>
+      <input type="text" id="nombre" placeholder="Tu nombre">
+      <button class="confirm" onclick="confirmar()">Confirmar</button>
+      <table id="rsvp-table">
+        <thead><tr><th>Nombre</th></tr></thead>
+        <tbody id="tabla-asistencia"></tbody>
+      </table>
+    </div>
 
     <footer>¡Gracias por acompañarme en este momento tan especial! 🎓</footer>
   </div>
 
+  <script src="script.js"></script>
   <script>
-    const countdownEl = document.getElementById('countdown');
-    const target = new Date('2025-08-01T00:00:00');
-
-    function updateCountdown() {
-      const diff = target - new Date();
-      if (diff <= 0) { countdownEl.textContent = '¡Hoy es el gran día!'; return; }
-      const d = Math.floor(diff / 86400000),
-            h = Math.floor(diff % 86400000 / 3600000),
-            m = Math.floor(diff % 3600000 / 60000),
-            s = Math.floor(diff % 60000 / 1000);
-      countdownEl.textContent = `${d}d ${h}h ${m}m ${s}s`;
-    }
-    setInterval(updateCountdown,1000);
-    updateCountdown();
-
-    const music = document.getElementById('bg-music');
-    document.getElementById('music-btn').onclick = () => {
-      music.volume = 0.3;
-      music.play();
-      document.getElementById('music-btn').style.display = 'none';
-    };
-
-    const lista = [];
-    function confirmar() {
-      const n = document.getElementById('nombre').value.trim();
-      if (!n) return;
-      lista.push(n);
-      const tr = document.createElement('tr');
-      tr.innerHTML = `<td>${n}</td>`;
-      document.getElementById('tabla-asistencia').appendChild(tr);
-      document.getElementById('nombre').value='';
-      window.open(`https://wa.me/5212218095921?text=Hola%2C%20soy%20${encodeURIComponent(n)}%20y%20nos%20vemos%20en%20tu%20fiesta!`, '_blank');
-    }
+    particlesJS("particles-js", {
+      particles: {
+        number: {value: 80, density:{enable:true,value_area:800}},
+        color: {value:"#e0b84f"},
+        shape: {type:"circle"},
+        opacity: {value:0.5},
+        size: {value:3, random:true},
+        line_linked: {enable:true, distance:150, color:"#e0b84f", opacity:0.4, width:1},
+        move: {enable:true, speed:3}
+      },
+      interactivity: {
+        detect_on:"canvas",
+        events: {onhover:{enable:true,mode:"grab"}, onclick:{enable:true,mode:"push"}},
+        modes: {grab:{distance:140,line_linked:{opacity:0.8}}, push:{particles_nb:4}}
+      }, retina_detect:true
+    });
   </script>
-  <script>
-  particlesJS("particles-js", {
-    "particles": {
-      "number": {
-        "value": 80,
-        "density": {
-          "enable": true,
-          "value_area": 800
-        }
-      },
-      "color": {
-        "value": "#e0b84f"
-      },
-      "shape": {
-        "type": "circle",
-        "stroke": {
-          "width": 0,
-          "color": "#000"
-        }
-      },
-      "opacity": {
-        "value": 0.5,
-        "random": false
-      },
-      "size": {
-        "value": 3,
-        "random": true
-      },
-      "line_linked": {
-        "enable": true,
-        "distance": 150,
-        "color": "#e0b84f",
-        "opacity": 0.4,
-        "width": 1
-      },
-      "move": {
-        "enable": true,
-        "speed": 3,
-        "direction": "none",
-        "random": false,
-        "straight": false,
-        "bounce": false
-      }
-    },
-    "interactivity": {
-      "detect_on": "canvas",
-      "events": {
-        "onhover": {
-          "enable": true,
-          "mode": "grab"
-        },
-        "onclick": {
-          "enable": true,
-          "mode": "push"
-        }
-      },
-      "modes": {
-        "grab": {
-          "distance": 140,
-          "line_linked": {
-            "opacity": 0.8
-          }
-        },
-        "push": {
-          "particles_nb": 4
-        }
-      }
-    },
-    "retina_detect": true
-  });
-</script>
-
 </body>
 </html>
