@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
   <title>Mi Graduación</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins&display=swap" rel="stylesheet">
 </head>
 <body class="inicio">
-
-  <div class="sobre">
-    <div class="sobre-cuerpo">
-      <h1>Mi Graduación</h1>
-      <button class="boton-abrir" onclick="abrirInvitacion()">Abrir</button>
+  <div class="sobre-contenedor">
+    <div class="sobre">
+      <div class="solapa"></div>
+      <div class="cuerpo">
+        <h1>Mi Graduación</h1>
+        <button class="boton-abrir" onclick="abrirSobre()">Abrir</button>
+      </div>
     </div>
   </div>
 
@@ -21,18 +22,16 @@
   </audio>
 
   <script>
-    function abrirInvitacion() {
+    function abrirSobre() {
       const music = document.getElementById("bg-music");
       music.volume = 0.3;
-      music.play().then(() => {
-        // Espera breve antes de redirigir (para asegurar que se escuche el inicio)
-        setTimeout(() => {
-          window.location.href = "invitacion.html";
-        }, 500);
-      }).catch(() => {
-        // Si no se permite autoplay, redirige igual
+      music.play().catch(()=>{});
+      
+      document.querySelector(".sobre").classList.add("abierto");
+
+      setTimeout(() => {
         window.location.href = "invitacion.html";
-      });
+      }, 1400); // Esperamos la animación
     }
   </script>
 </body>
