@@ -41,7 +41,7 @@ body {
 
 .solapa {
   position: absolute;
-  bottom: 0px;
+  bottom: 10px;
   left: 0;
   width: 0;
   height: 0;
