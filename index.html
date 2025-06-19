@@ -4,47 +4,62 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <title>Graduación Ángel Pérez Santos</title>
+
+  <!-- Partículas y animaciones -->
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <link rel="stylesheet" href="style.css" />
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
 </head>
 <body>
+  <!-- Fondo de partículas -->
   <div id="particles-js"></div>
+
   <div class="container">
-    <h1>Graduación de Ángel Pérez Santos</h1>
-    <div class="countdown" id="countdown">Cargando...</div>
+    <h1 data-aos="fade-down">Graduación de Ángel Pérez Santos</h1>
+    <div class="countdown" id="countdown" data-aos="fade-up" data-aos-delay="300">Cargando...</div>
+
+    <!-- Música -->
     <button id="music-btn">🎵 Activar música de fondo</button>
     <audio id="bg-music" loop>
       <source src="https://www.bensound.com/bensound-music/bensound-sunny.mp3" type="audio/mp3" />
     </audio>
 
-    <h2>Ubicación del evento</h2>
-    <iframe class="map" 
-      src="https://www.google.com/maps?q=Av.+de+los+Fresnos,+72778,+Cholula+de+Rivadavia,+Pue.&output=embed"
-      allowfullscreen></iframe>
+    <!-- Mapa -->
+    <h2 data-aos="fade-right">Ubicación del evento</h2>
+    <iframe class="map" data-aos="zoom-in"
+      src="https://www.google.com/maps/embed?pb=!4v1718759846753!6m8!1m7!1svNtsDtCM8Zy95gwdi661NQ!2m2!1d19.0623576!2d-98.2972204!3f157.06030191760323!4f16.109903903987444!5f0.7820865974627469"
+      allowfullscreen loading="lazy">
+    </iframe>
 
-    <h2>Galería</h2>
-    <div class="gallery">
+    <!-- Galería -->
+    <h2 data-aos="fade-left">Galería</h2>
+    <div class="gallery" data-aos="fade-up" data-aos-delay="500">
       <img src="img/img1.jpg" alt="Imagen 1">
       <img src="img/img2.jpg" alt="Imagen 2">
       <img src="img/img3.jpg" alt="Imagen 3">
       <img src="img/img4.jpg" alt="Imagen 4">
     </div>
 
+    <!-- Confirmación -->
     <div class="rsvp-section">
-      <h2>Confirma tu asistencia</h2>
+      <h2 data-aos="fade-right">Confirma tu asistencia</h2>
       <input type="text" id="nombre" placeholder="Tu nombre">
       <button class="confirm" onclick="confirmar()">Confirmar</button>
-      <table id="rsvp-table">
+      <table id="rsvp-table" data-aos="fade-up" data-aos-delay="300">
         <thead><tr><th>Nombre</th></tr></thead>
         <tbody id="tabla-asistencia"></tbody>
       </table>
     </div>
 
-    <footer>¡Gracias por acompañarme en este momento tan especial! 🎓</footer>
+    <footer data-aos="fade-up">¡Gracias por acompañarme en este momento tan especial! 🎓</footer>
   </div>
 
+  <!-- Scripts -->
   <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>AOS.init();</script>
   <script>
+    // Fondo de partículas
     particlesJS("particles-js", {
       particles: {
         number: {value: 80, density:{enable:true,value_area:800}},
