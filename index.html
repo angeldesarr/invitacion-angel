@@ -5,77 +5,59 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <title>Graduación Ángel Pérez Santos</title>
 
-  <!-- Partículas y animaciones -->
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-  <link rel="stylesheet" href="style.css" />
+  <!-- Tipografías -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins&display=swap" rel="stylesheet" />
+
+  <!-- AOS (Animaciones) -->
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <!-- Fondo de partículas -->
   <div id="particles-js"></div>
 
-  <div class="container">
-    <h1 data-aos="fade-down">Graduación de Ángel Pérez Santos</h1>
-    <div class="countdown" id="countdown" data-aos="fade-up" data-aos-delay="300">Cargando...</div>
+  <!-- Tarjeta de invitación -->
+  <div class="card-container">
+    <div class="invitation-card" id="card">
+      <div class="card-front">
+        <h1>🎓 Mi Graduación</h1>
+        <p>Haz clic para abrir</p>
+      </div>
+      <div class="card-back">
+        <div class="content">
+          <h2>Graduación de Ángel Pérez Santos</h2>
+          <p class="date">📅 1º de agosto de 2025</p>
+          <p class="location">📍 Av. de los Fresnos, Cholula, Puebla</p>
 
-    <!-- Música -->
-    <button id="music-btn">🎵 Activar música de fondo</button>
-    <audio id="bg-music" loop>
-      <source src="https://www.bensound.com/bensound-music/bensound-sunny.mp3" type="audio/mp3" />
-    </audio>
+          <div class="countdown" id="countdown">Cargando...</div>
 
-    <!-- Mapa -->
-    <h2 data-aos="fade-right">Ubicación del evento</h2>
-    <iframe class="map" data-aos="zoom-in"
-      src="https://www.google.com/maps/embed?pb=!4v1718759846753!6m8!1m7!1svNtsDtCM8Zy95gwdi661NQ!2m2!1d19.0623576!2d-98.2972204!3f157.06030191760323!4f16.109903903987444!5f0.7820865974627469"
-      allowfullscreen loading="lazy">
-    </iframe>
+          <p class="message">
+            Hoy cierro un ciclo con el corazón lleno.  
+            Esta graduación representa más que un título: es el fruto de años de esfuerzo, desvelos, caídas, aprendizajes y constancia.  
+            Gracias a quienes estuvieron presentes en el camino.  
+            Hoy celebro no solo un logro académico, sino el crecimiento personal que me trajo hasta aquí.
+          </p>
 
-    <!-- Galería -->
-    <h2 data-aos="fade-left">Galería</h2>
-    <div class="gallery" data-aos="fade-up" data-aos-delay="500">
-      <img src="img/img1.jpg" alt="Imagen 1">
-      <img src="img/img2.jpg" alt="Imagen 2">
-      <img src="img/img3.jpg" alt="Imagen 3">
-      <img src="img/img4.jpg" alt="Imagen 4">
+          <h3>Confirma tu asistencia</h3>
+          <input type="text" id="nombre" placeholder="Tu nombre">
+          <button onclick="confirmar()">Confirmar por WhatsApp</button>
+
+          <h3>Ubicación</h3>
+          <iframe class="map" 
+            src="https://www.google.com/maps/embed?pb=!4v1718759846753!6m8!1m7!1svNtsDtCM8Zy95gwdi661NQ!2m2!1d19.0623576!2d-98.2972204!3f157.06030191760323!4f16.109903903987444!5f0.7820865974627469" 
+            allowfullscreen loading="lazy">
+          </iframe>
+        </div>
+      </div>
     </div>
-
-    <!-- Confirmación -->
-    <div class="rsvp-section">
-      <h2 data-aos="fade-right">Confirma tu asistencia</h2>
-      <input type="text" id="nombre" placeholder="Tu nombre">
-      <button class="confirm" onclick="confirmar()">Confirmar</button>
-      <table id="rsvp-table" data-aos="fade-up" data-aos-delay="300">
-        <thead><tr><th>Nombre</th></tr></thead>
-        <tbody id="tabla-asistencia"></tbody>
-      </table>
-    </div>
-
-    <footer data-aos="fade-up">¡Gracias por acompañarme en este momento tan especial! 🎓</footer>
   </div>
 
   <!-- Scripts -->
-  <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="script.js"></script>
   <script>AOS.init();</script>
-  <script>
-    // Fondo de partículas
-    particlesJS("particles-js", {
-      particles: {
-        number: {value: 80, density:{enable:true,value_area:800}},
-        color: {value:"#e0b84f"},
-        shape: {type:"circle"},
-        opacity: {value:0.5},
-        size: {value:3, random:true},
-        line_linked: {enable:true, distance:150, color:"#e0b84f", opacity:0.4, width:1},
-        move: {enable:true, speed:3}
-      },
-      interactivity: {
-        detect_on:"canvas",
-        events: {onhover:{enable:true,mode:"grab"}, onclick:{enable:true,mode:"push"}},
-        modes: {grab:{distance:140,line_linked:{opacity:0.8}}, push:{particles_nb:4}}
-      }, retina_detect:true
-    });
-  </script>
 </body>
 </html>
