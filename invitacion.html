@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invitación a Mi Graduación</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+</head>
+<body class="invitacion">
+
+  <div id="particles-js"></div>
+
+  <div class="contenedor">
+    <h1 class="titulo">¡Bienvenidos a mi Graduación!</h1>
+
+    <p class="mensaje">
+      Hoy termina una etapa que me enseñó a resistir, crecer y creer en mí mismo. Esta graduación no es solo un papel, es la prueba de que los sueños se conquistan con esfuerzo, disciplina y corazón.  
+      Gracias por formar parte de este camino.  
+    </p>
+
+    <div class="info">
+      <p><strong>📅 Fecha:</strong> 1º de agosto de 2025</p>
+      <p><strong>🕕 Hora:</strong> 6:00 PM</p>
+      <p><strong>📍 Dirección:</strong> Av. de los Fresnos, 72778 Cholula de Rivadavia, Pue.</p>
+    </div>
+
+    <h2>¿Cómo llegar?</h2>
+    <iframe class="mapa"
+      src="https://www.google.com/maps/embed?pb=!4v1718759846753!6m8!1m7!1svNtsDtCM8Zy95gwdi661NQ!2m2!1d19.0623576!2d-98.2972204!3f157.06030191760323!4f16.109903903987444!5f0.7820865974627469"
+      allowfullscreen="" loading="lazy">
+    </iframe>
+
+    <h2>Confirma tu asistencia 🎉</h2>
+    <input type="text" id="nombre" placeholder="Tu nombre">
+    <button onclick="confirmarAsistencia()">Confirmar por WhatsApp</button>
+
+    <footer>Gracias por compartir este gran logro conmigo 🎓</footer>
+  </div>
+
+  <audio id="bg-music" autoplay loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-sunny.mp3" type="audio/mp3">
+  </audio>
+
+  <script src="script.js"></script>
+</body>
+</html>
