@@ -1,3 +1,18 @@
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden;
+  background: #000;
+  color: #fff;
+}
+
+#particles-js {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
 .sobre-contenedor {
   display: flex;
   justify-content: center;
@@ -8,47 +23,43 @@
 
 .sobre {
   position: relative;
-  width: 300px;
-  height: 200px;
+  width: 360px;
+  height: 220px;
   background: #e0b84f;
+  border: 3px solid #fff;
   border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
-  overflow: hidden;
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
   transition: transform 1s ease;
+  overflow: hidden;
 }
 
 .solapa {
   position: absolute;
-  top: 0;
+  bottom: 100%;
   left: 0;
   width: 0;
   height: 0;
-  border-left: 150px solid transparent;
-  border-right: 150px solid transparent;
-  border-bottom: 100px solid #d4a42e;
-  z-index: 2;
+  border-left: 180px solid transparent;
+  border-right: 180px solid transparent;
+  border-top: 110px solid #d4a42e;
+  transform-origin: bottom;
   transition: transform 1s ease;
-  transform-origin: top;
+  z-index: 2;
 }
 
 .sobre.abierto .solapa {
-  transform: rotateX(-180deg);
+  transform: rotateX(180deg);
 }
 
 .cuerpo {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  padding-top: 90px;
-  z-index: 1;
   text-align: center;
-  color: #000;
+  padding-top: 80px;
 }
 
-.sobre h1 {
+.cuerpo h1 {
   font-family: 'Playfair Display', serif;
-  font-size: 1.6rem;
-  margin: 0;
+  font-size: 2rem;
+  color: #000;
 }
 
 .boton-abrir {
@@ -56,14 +67,84 @@
   padding: 0.7rem 1.5rem;
   background-color: #000;
   color: #e0b84f;
-  border: 2px solid #e0b84f;
+  border: 2px solid #fff;
   border-radius: 50%;
   font-weight: bold;
-  cursor: pointer;
   font-size: 1rem;
+  cursor: pointer;
   transition: transform 0.3s ease;
 }
 
 .boton-abrir:hover {
   transform: scale(1.1);
+}
+
+.contenido {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  animation: aparecer 1s ease-in-out forwards;
+  text-align: center;
+  max-width: 700px;
+  margin: auto;
+}
+
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.contenido h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  color: #e0b84f;
+  margin-bottom: 1rem;
+}
+
+.contenido p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.info {
+  background: rgba(255,255,255,0.1);
+  padding: 1rem;
+  border-radius: 10px;
+  margin: 1rem 0;
+  border: 1px solid #e0b84f;
+}
+
+.mapa {
+  width: 100%;
+  height: 300px;
+  border-radius: 10px;
+  border: none;
+  margin-top: 1rem;
+}
+
+input {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: none;
+  margin-top: 1rem;
+}
+
+button.confirmar {
+  background: #e0b84f;
+  color: #000;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  border-radius: 5px;
+  margin-top: 0.5rem;
+  cursor: pointer;
+}
+
+footer {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: #aaa;
 }
