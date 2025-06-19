@@ -1,27 +1,36 @@
-// Partículas
-particlesJS("particles-js", {
-  particles: {
-    number: { value: 80, density: { enable: true, value_area: 800 } },
-    color: { value: "#e0b84f" },
-    shape: { type: "circle" },
-    opacity: { value: 0.5 },
-    size: { value: 3, random: true },
-    line_linked: { enable: true, distance: 150, color: "#e0b84f", opacity: 0.4, width: 1 },
-    move: { enable: true, speed: 2 }
-  },
-  interactivity: {
-    detect_on: "canvas",
-    events: { onhover: { enable: true, mode: "grab" }, onclick: { enable: true, mode: "push" } },
-    modes: { grab: { distance: 140, line_linked: { opacity: 0.8 } }, push: { particles_nb: 4 } }
-  },
-  retina_detect: true
-});
+// Mostrar partículas solo después de abrir carta
+function abrirCarta() {
+  const sobre = document.getElementById('envelope');
+  const contenido = document.getElementById('contenido');
+  const music = document.getElementById('bg-music');
 
-// Abrir tarjeta
-const card = document.getElementById("card");
-card.addEventListener("click", () => {
-  card.classList.toggle("open");
-});
+  sobre.style.display = 'none';
+  contenido.classList.remove('hidden');
+  document.getElementById('particles-js').classList.remove('hidden');
+
+  // Iniciar música
+  music.volume = 0.3;
+  music.play();
+
+  // Iniciar partículas
+  particlesJS("particles-js", {
+    particles: {
+      number: { value: 80, density: { enable: true, value_area: 800 } },
+      color: { value: "#e0b84f" },
+      shape: { type: "circle" },
+      opacity: { value: 0.5 },
+      size: { value: 3, random: true },
+      line_linked: { enable: true, distance: 150, color: "#e0b84f", opacity: 0.4, width: 1 },
+      move: { enable: true, speed: 2 }
+    },
+    interactivity: {
+      detect_on: "canvas",
+      events: { onhover: { enable: true, mode: "grab" }, onclick: { enable: true, mode: "push" } },
+      modes: { grab: { distance: 140, line_linked: { opacity: 0.8 } }, push: { particles_nb: 4 } }
+    },
+    retina_detect: true
+  });
+}
 
 // Cuenta regresiva
 const countdownEl = document.getElementById('countdown');
