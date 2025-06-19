@@ -2,32 +2,32 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Graduación Ángel Pérez Santos</title>
 
   <!-- Tipografías -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins&display=swap" rel="stylesheet">
 
-  <!-- Estilos -->
+  <!-- CSS -->
   <link rel="stylesheet" href="style.css">
 
   <!-- Partículas -->
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 </head>
 <body>
-  <!-- Fondo de partículas (inicia oculto) -->
+  <!-- Fondo partículas (oculto al inicio) -->
   <div id="particles-js" class="hidden"></div>
 
-  <!-- Contenedor de carta cerrada -->
+  <!-- Sobre animado -->
   <div class="envelope" id="envelope">
     <div class="flap"></div>
     <div class="body">
-      <h1>🎓 Mi Graduación</h1>
+      <h1>Mi Graduación</h1>
       <button class="open-btn" onclick="abrirCarta()">Abrir</button>
     </div>
   </div>
 
-  <!-- Contenido de la invitación (oculto hasta abrir) -->
+  <!-- Contenido de la invitación -->
   <div class="content hidden" id="contenido">
     <h2>Graduación de Ángel Pérez Santos</h2>
     <p class="fecha">📅 1º de agosto de 2025</p>
@@ -58,6 +58,7 @@
     <source src="https://www.bensound.com/bensound-music/bensound-sunny.mp3" type="audio/mp3">
   </audio>
 
+  <!-- JavaScript -->
   <script src="script.js"></script>
 </body>
 </html>
