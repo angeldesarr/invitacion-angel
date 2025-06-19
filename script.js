@@ -15,12 +15,15 @@ particlesJS("particles-js", {
   }
 });
 
-// Animación de apertura de sobre
-function abrirInvitacion() {
-  document.getElementById("sobre").classList.add("abierto");
-  const music = document.getElementById("bg-music");
-  music.volume = 0.3;
-  music.play().catch(() => {});
+// Apertura del sobre con animación
+function abrirInvitacion(boton) {
+  const sobre = document.getElementById("sobre");
+  sobre.classList.add("abierto");
+  boton.style.display = "none";
+
+  const musica = document.getElementById("bg-music");
+  musica.volume = 0.3;
+  musica.play().catch(() => {});
 
   setTimeout(() => {
     document.getElementById("pantalla-sobre").style.display = "none";
@@ -28,7 +31,7 @@ function abrirInvitacion() {
   }, 1200);
 }
 
-// Confirmación por WhatsApp
+// Confirmación vía WhatsApp
 function confirmarAsistencia() {
   const nombre = document.getElementById("nombre").value.trim();
   if (!nombre) {
