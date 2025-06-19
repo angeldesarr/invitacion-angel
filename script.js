@@ -15,23 +15,25 @@ particlesJS("particles-js", {
   }
 });
 
-// Apertura del sobre con animación
+// Abrir invitación con animación de zoom
 function abrirInvitacion(boton) {
   const sobre = document.getElementById("sobre");
-  sobre.classList.add("abierto");
-  boton.style.display = "none";
-
   const musica = document.getElementById("bg-music");
+  boton.disabled = true;
+
   musica.volume = 0.3;
   musica.play().catch(() => {});
+
+  sobre.classList.add("zoom");
 
   setTimeout(() => {
     document.getElementById("pantalla-sobre").style.display = "none";
     document.getElementById("contenido-invitacion").style.display = "flex";
+    document.body.style.overflowY = "auto"; // habilita scroll cuando se muestra contenido
   }, 1200);
 }
 
-// Confirmación vía WhatsApp
+// Confirmar por WhatsApp
 function confirmarAsistencia() {
   const nombre = document.getElementById("nombre").value.trim();
   if (!nombre) {
