@@ -4,7 +4,7 @@ body {
   font-family: 'Poppins', sans-serif;
   background: #000;
   color: #fff;
-  overflow: hidden;
+  overflow-y: auto; /* <-- Esto permite scroll */
 }
 
 #particles-js {
@@ -34,22 +34,21 @@ body {
   overflow: hidden;
 }
 
+.sobre.zoom {
+  transform: scale(3);
+  opacity: 0;
+}
+
 .solapa {
   position: absolute;
-  top: 100%;
+  bottom: -55px;
   left: 0;
   width: 0;
   height: 0;
   border-left: 180px solid transparent;
   border-right: 180px solid transparent;
-  border-bottom: 110px solid #d4a42e;
-  transform-origin: top;
-  transition: transform 1s ease;
+  border-top: 110px solid #d4a42e;
   z-index: 2;
-}
-
-.sobre.abierto .solapa {
-  transform: rotateX(180deg);
 }
 
 .cuerpo {
