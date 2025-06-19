@@ -25,7 +25,19 @@ document.getElementById('music-btn').addEventListener('click', () => {
   document.getElementById('music-btn').style.display = 'none';
 });
 
-// Galería fade-in al scroll
+// Intento automático al cargar la página
+window.addEventListener('DOMContentLoaded', () => {
+  const playPromise = music.play();
+  if (playPromise !== undefined) {
+    playPromise.then(_ => {
+      document.getElementById('music-btn').style.display = 'none';
+    }).catch(error => {
+      console.log('Autoplay bloqueado, clic necesario');
+    });
+  }
+});
+
+// Galería con fade-in
 const imgs = document.querySelectorAll('.gallery img');
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
@@ -38,7 +50,7 @@ const observer = new IntersectionObserver(entries => {
 
 imgs.forEach(img => observer.observe(img));
 
-// Confirmar asistencia y WhatsApp
+// Confirmación + WhatsApp
 const lista = [];
 function confirmar() {
   const n = document.getElementById('nombre').value.trim();
