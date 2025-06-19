@@ -1,3 +1,28 @@
+// Partículas
+particlesJS("particles-js", {
+  particles: {
+    number: { value: 80, density: { enable: true, value_area: 800 } },
+    color: { value: "#e0b84f" },
+    shape: { type: "circle" },
+    opacity: { value: 0.5 },
+    size: { value: 3, random: true },
+    line_linked: { enable: true, distance: 150, color: "#e0b84f", opacity: 0.4, width: 1 },
+    move: { enable: true, speed: 2 }
+  },
+  interactivity: {
+    detect_on: "canvas",
+    events: { onhover: { enable: true, mode: "grab" }, onclick: { enable: true, mode: "push" } },
+    modes: { grab: { distance: 140, line_linked: { opacity: 0.8 } }, push: { particles_nb: 4 } }
+  },
+  retina_detect: true
+});
+
+// Abrir tarjeta
+const card = document.getElementById("card");
+card.addEventListener("click", () => {
+  card.classList.toggle("open");
+});
+
 // Cuenta regresiva
 const countdownEl = document.getElementById('countdown');
 const targetDate = new Date('2025-08-01T00:00:00');
@@ -17,51 +42,11 @@ function updateCountdown() {
 setInterval(updateCountdown, 1000);
 updateCountdown();
 
-// Música
-const music = document.getElementById('bg-music');
-document.getElementById('music-btn').addEventListener('click', () => {
-  music.volume = 0.3;
-  music.play();
-  document.getElementById('music-btn').style.display = 'none';
-});
-
-// Intento automático al cargar la página
-window.addEventListener('DOMContentLoaded', () => {
-  const playPromise = music.play();
-  if (playPromise !== undefined) {
-    playPromise.then(_ => {
-      document.getElementById('music-btn').style.display = 'none';
-    }).catch(error => {
-      console.log('Autoplay bloqueado, clic necesario');
-    });
-  }
-});
-
-// Galería con fade-in
-const imgs = document.querySelectorAll('.gallery img');
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
-    }
-  });
-}, {threshold: 0.3});
-
-imgs.forEach(img => observer.observe(img));
-
-// Confirmación + WhatsApp
-const lista = [];
+// Confirmación por WhatsApp
 function confirmar() {
-  const n = document.getElementById('nombre').value.trim();
-  if (!n) return;
-  lista.push(n);
-  const tr = document.createElement('tr');
-  tr.innerHTML = `<td>${n}</td>`;
-  document.getElementById('tabla-asistencia').appendChild(tr);
-  document.getElementById('nombre').value = '';
-
-  const mensaje = `Hola soy ${encodeURIComponent(n)} y nos vemos en tu fiesta!`;
+  const nombre = document.getElementById('nombre').value.trim();
+  if (!nombre) return alert("Por favor, escribe tu nombre.");
+  const mensaje = `Hola soy ${encodeURIComponent(nombre)} y nos vemos en tu fiesta 🎓🎉`;
   const numero = '2218095921';
   window.open(`https://wa.me/52${numero}?text=${mensaje}`, '_blank');
 }
