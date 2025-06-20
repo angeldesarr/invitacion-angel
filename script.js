@@ -1,41 +1,38 @@
-const sobre = document.getElementById('sobre');
-const invitacion = document.getElementById('invitacion');
-const musica = document.getElementById('bg-music');
-
-document.getElementById('btnAbrir').addEventListener('click', () => {
-  sobre.classList.add('zoom');
-  musica.volume = 0.4;
-  musica.play().catch(() => {});
-  
-  setTimeout(() => {
-    document.getElementById('sobre-container').remove();
-    invitacion.classList.add('show');
-    invitacion.hidden = false;
-    document.body.style.overflow = 'auto';
-  }, 1000);
-});
-
-document.getElementById('btnConfirmar').addEventListener('click', () => {
-  const nombre = document.getElementById('nombre').value.trim();
-  if (!nombre) return alert('Escribe tu nombre.');
-  window.open(
-    `https://wa.me/52${'2218095921'}?text=${encodeURIComponent(`Hola, soy ${nombre} y confirmo mi asistencia 🎓`)}`,
-    '_blank'
-  );
-});
-
-// Configuración de partículas
-particlesJS('particles-js', {
+// Activar partículas
+particlesJS("particles-js", {
   particles: {
-    number: { value: 80 },
-    color: { value: '#e0b84f' },
-    shape: { type: 'circle' },
-    opacity: { value: 0.6 },
-    size: { value: 3, random: true },
-    line_linked: { enable: true, color: '#e0b84f' },
-    move: { enable: true, speed: 2 }
+    number: { value: 50 },
+    color: { value: "#FFD700" },
+    shape: { type: "circle" },
+    opacity: { value: 0.7 },
+    size: { value: 3 },
+    move: { enable: true, speed: 1 }
   },
   interactivity: {
-    events: { onhover: { enable: true, mode: 'grab' } }
+    events: {
+      onhover: { enable: true, mode: "repulse" }
+    }
   }
 });
+
+const botonVer = document.getElementById('ver-invitacion');
+const main = document.querySelector('.contenido');
+const musica = document.getElementById('bg-music');
+
+botonVer.addEventListener('click', () => {
+  main.classList.add('visible');
+  musica.volume = 0.3;
+  musica.play();
+  document.querySelector('.hero').style.display = 'none';
+});
+
+function confirmarAsistencia() {
+  const nombre = document.getElementById("nombre").value.trim();
+  if (!nombre) {
+    alert("Por favor, escribe tu nombre.");
+    return;
+  }
+  const mensaje = `Hola, soy ${nombre}. ¡Nos vemos en tu fiesta de graduación! 🎓`;
+  const url = `https://wa.me/5212218095921?text=${encodeURIComponent(mensaje)}`;
+  window.open(url, '_blank');
+}
