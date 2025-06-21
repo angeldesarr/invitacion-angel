@@ -17,7 +17,7 @@ particlesJS("particles-js", {
 
 // Typed.js para título
 new Typed("#typed-text", {
-  strings: ["Bienvenidos", "2º de Agosto, 6:00 PM", "¡Estás cordialmente invitado!"],
+  strings: ["Bienvenidos", "2 de Agosto, 6:00 PM", "¡Estás cordialmente invitado!"],
   typeSpeed: 50,
   backSpeed: 25,
   loop: true
