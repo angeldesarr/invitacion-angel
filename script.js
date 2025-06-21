@@ -1,7 +1,7 @@
 // Fondo de partículas doradas
 particlesJS("particles-js", {
   particles: {
-    number: { value: 60 },
+    number: { value: 150 },
     color: { value: "#FFD700" },
     shape: { type: "circle" },
     opacity: { value: 0.5 },
