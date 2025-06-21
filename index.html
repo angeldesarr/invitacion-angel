@@ -2,35 +2,38 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Graduación de Ángel Pérez</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Graduación Ángel Pérez Santos</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Montserrat&display=swap" rel="stylesheet">
 </head>
 <body>
   <div id="particles-js"></div>
 
-  <div class="entrada">
-    <h1 id="titulo" class="typewrite" data-period="2000" data-type='[ "Graduación Ángel Pérez Santos", "1º de Agosto, 6:00 PM", "¡Estás cordialmente invitado!" ]'></h1>
-    <button id="btn-invitacion">🎓 Ver invitación</button>
-  </div>
+  <!-- ENTRADA -->
+  <section class="entrada">
+    <h1 id="typed-text"></h1>
+    <button id="btn-ver">🎓 Ver invitación</button>
+  </section>
 
+  <!-- CONTENIDO -->
   <main class="contenido oculto">
-    <section class="mensaje">
+    <section class="mensaje scroll">
       <h2>Gracias por estar aquí</h2>
-      <p>Después de años de esfuerzo, dedicación y muchas noches en vela, este logro representa más que un título: es el reflejo de mis sueños, mi lucha y de todos los que creyeron en mí. Me encantaría compartir este momento contigo.</p>
+      <p class="reveal">Este logro no es solo mío… es de cada noche sin dormir, cada lágrima silenciosa y cada sonrisa al imaginar este momento.<br><br>
+      Te invito a formar parte de este capítulo, porque si estás leyendo esto, es porque eres parte de mi historia.</p>
     </section>
 
-    <section class="detalles">
+    <section class="detalles scroll">
       <h3>📍 Detalles del evento</h3>
       <ul>
         <li><strong>Fecha:</strong> 1º de agosto, 6:00 PM</li>
         <li><strong>Ubicación:</strong> Av. de los Fresnos, 72778 Cholula, Puebla</li>
       </ul>
-      <a class="mapa-link" href="https://www.google.com/maps/@19.0623576,-98.2972204,3a,75y,157.06h,73.89t/data=!3m10!1e1!3m8!1svNtsDtCM8Zy95gwdi661NQ!2e0!7i16384!8i8192" target="_blank">📍 Ver ubicación en Google Maps</a>
+      <a class="mapa-link" href="https://www.google.com/maps/@19.0623576,-98.2972204,3a,75y,157.06h,73.89t" target="_blank">📍 Ver en Google Maps</a>
     </section>
 
-    <section class="confirmacion">
+    <section class="confirmacion scroll">
       <h3>Confirma tu asistencia</h3>
       <input type="text" id="nombre" placeholder="Escribe tu nombre..." />
       <button onclick="confirmarAsistencia()">Confirmar por WhatsApp</button>
@@ -38,13 +41,14 @@
   </main>
 
   <audio id="bg-music" loop>
-    <source src="https://www.bensound.com/bensound-music/bensound-sunny.mp3" type="audio/mp3">
+    <source src="https://www.bensound.com/bensound-music/bensound-sunny.mp3" type="audio/mp3" />
   </audio>
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
