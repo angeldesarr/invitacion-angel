@@ -113,3 +113,14 @@ button:hover {
   opacity: 0;
   transform: translateY(40px);
 }
+
+/* Imágenes adaptables para todos los dispositivos */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1rem auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* opcional: sombra elegante */
+}
+
