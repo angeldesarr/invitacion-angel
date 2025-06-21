@@ -60,7 +60,7 @@ function confirmarAsistencia() {
 }
 
 // ⏳ Contador regresivo hasta el 2 de agosto a las 6:00 PM
-const fechaEvento = new Date("2025-08-02T18:00:00");
+const fechaEvento = new Date("2025-08-02T18:00:00-06:00");
 const diasEl = document.getElementById("dias");
 const horasEl = document.getElementById("horas");
 const minutosEl = document.getElementById("minutos");
