@@ -20,7 +20,9 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0,0,0,0.0);
+  background-color: transparent;
+  backdrop-filter: blur(1px); /* ← desenfoque sutil */
+  -webkit-backdrop-filter: blur(1px);
   text-align: center;
   padding: 2rem;
 }
