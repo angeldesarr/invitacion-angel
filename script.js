@@ -1,12 +1,12 @@
-// Activar partículas
+// Partículas doradas
 particlesJS("particles-js", {
   particles: {
-    number: { value: 50 },
+    number: { value: 60 },
     color: { value: "#FFD700" },
     shape: { type: "circle" },
-    opacity: { value: 0.7 },
-    size: { value: 3 },
-    move: { enable: true, speed: 1 }
+    opacity: { value: 0.5 },
+    size: { value: 4 },
+    move: { enable: true, speed: 1.5 }
   },
   interactivity: {
     events: {
@@ -15,17 +15,27 @@ particlesJS("particles-js", {
   }
 });
 
-const botonVer = document.getElementById('ver-invitacion');
-const main = document.querySelector('.contenido');
-const musica = document.getElementById('bg-music');
-
-botonVer.addEventListener('click', () => {
-  main.classList.add('visible');
-  musica.volume = 0.3;
-  musica.play();
-  document.querySelector('.hero').style.display = 'none';
+// Typed.js animación
+new Typed('#titulo', {
+  stringsElement: null,
+  strings: ["Graduación Ángel Pérez Santos", "1º de Agosto, 6:00 PM", "¡Estás cordialmente invitado!"],
+  typeSpeed: 60,
+  backSpeed: 30,
+  loop: true
 });
 
+// Transición e inicio de música
+const boton = document.getElementById("btn-invitacion");
+const musica = document.getElementById("bg-music");
+
+boton.addEventListener("click", () => {
+  musica.volume = 0.3;
+  musica.play();
+  document.querySelector('.entrada').style.display = "none";
+  document.querySelector('.contenido').classList.add("visible");
+});
+
+// WhatsApp Confirmación
 function confirmarAsistencia() {
   const nombre = document.getElementById("nombre").value.trim();
   if (!nombre) {
