@@ -115,12 +115,17 @@ button:hover {
 }
 
 /* Imágenes adaptables para todos los dispositivos */
+.contenedor-imagenes {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
 img {
-  max-width: 100%;
+  width: 100%;
   height: auto;
   display: block;
   margin: 1rem auto;
   border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* opcional: sombra elegante */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
-
