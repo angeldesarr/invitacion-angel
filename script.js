@@ -58,3 +58,33 @@ function confirmarAsistencia() {
   const link = `https://wa.me/5212218095921?text=${encodeURIComponent(msg)}`;
   window.open(link, "_blank");
 }
+
+// ⏳ Contador regresivo hasta el 2 de agosto a las 6:00 PM
+const fechaEvento = new Date("2025-08-02T18:00:00");
+const diasEl = document.getElementById("dias");
+const horasEl = document.getElementById("horas");
+const minutosEl = document.getElementById("minutos");
+const segundosEl = document.getElementById("segundos");
+
+function actualizarContador() {
+  const ahora = new Date();
+  const diferencia = fechaEvento - ahora;
+
+  if (diferencia <= 0) {
+    document.getElementById("cuenta-regresiva").innerHTML = "🎉 ¡Ya comenzó el evento!";
+    return;
+  }
+
+  const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+  const horas = Math.floor((diferencia / (1000 * 60 * 60)) % 24);
+  const minutos = Math.floor((diferencia / (1000 * 60)) % 60);
+  const segundos = Math.floor((diferencia / 1000) % 60);
+
+  diasEl.textContent = String(dias).padStart(2, '0');
+  horasEl.textContent = String(horas).padStart(2, '0');
+  minutosEl.textContent = String(minutos).padStart(2, '0');
+  segundosEl.textContent = String(segundos).padStart(2, '0');
+}
+
+setInterval(actualizarContador, 1000);
+actualizarContador();
