@@ -62,8 +62,8 @@ body {
 
 section {
   margin-bottom: 4rem;
-  background: rgba(255, 255, 255, 0.03); /* Menos opaco */
-  backdrop-filter: blur(8px); /* Un poco más sutil */
+  background: rgba(255, 255, 255, 0.01); /* Menos opaco */
+  backdrop-filter: blur(4px); /* Un poco más sutil */
   -webkit-backdrop-filter: blur(8px);
   padding: 2rem;
   border-radius: 15px;
