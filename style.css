@@ -223,6 +223,7 @@ img {
   height: 150px;
   border-radius: 50%;
   object-fit: cover;
+  object-position: center top; /* <-- Esto centra y muestra más la parte superior */
   border: 4px solid #e0b84f;
   box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
 }
