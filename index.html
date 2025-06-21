@@ -10,10 +10,9 @@
 <body>
   <div id="particles-js"></div>
 
-  <div class="hero">
-    <h1 class="fade-in">🎓 Graduación de Ángel Pérez Santos</h1>
-    <p class="subtitle fade-in-delay">El primero de agosto a las 6:00 PM</p>
-    <button id="ver-invitacion" class="fade-in-later">Ver invitación</button>
+  <div class="entrada">
+    <h1 id="titulo" class="typewrite" data-period="2000" data-type='[ "Graduación Ángel Pérez Santos", "1º de Agosto, 6:00 PM", "¡Estás cordialmente invitado!" ]'></h1>
+    <button id="btn-invitacion">🎓 Ver invitación</button>
   </div>
 
   <main class="contenido oculto">
@@ -42,7 +41,10 @@
     <source src="https://www.bensound.com/bensound-music/bensound-sunny.mp3" type="audio/mp3">
   </audio>
 
+  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
