@@ -1,7 +1,7 @@
 body {
   margin: 0;
   font-family: 'Montserrat', sans-serif;
-  background: #000;
+  background-color: #000;
   color: #fff;
   overflow-x: hidden;
 }
@@ -13,55 +13,63 @@ body {
   z-index: -1;
 }
 
+/* Entrada inicial */
 .entrada {
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: rgba(0,0,0,0.8);
   text-align: center;
   padding: 2rem;
-  background-color: rgba(0, 0, 0, 0.6);
 }
 
 .entrada h1 {
   font-size: 2.5rem;
-  font-family: 'Playfair Display', serif;
   color: gold;
+  font-family: 'Playfair Display', serif;
 }
 
-.entrada button {
+#btn-ver {
   margin-top: 2rem;
   padding: 1rem 2rem;
   font-size: 1.2rem;
-  border: none;
-  border-radius: 8px;
   background: linear-gradient(to right, #f0c14b, #e0b84f);
+  border: none;
+  border-radius: 10px;
   color: #000;
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
-.entrada button:hover {
+#btn-ver:hover {
   transform: scale(1.05);
   box-shadow: 0 0 15px gold;
 }
 
-main.contenido {
+/* Contenido principal */
+.contenido {
   display: none;
-  padding: 2rem;
-  max-width: 800px;
+  padding: 3rem 1rem;
+  max-width: 900px;
   margin: auto;
 }
-
-main.contenido.visible {
+.contenido.visible {
   display: block;
-  animation: fadeIn 1s ease-in;
+}
+
+section {
+  margin-bottom: 4rem;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 0 10px #111;
 }
 
 h2, h3 {
-  color: #e0b84f;
   font-family: 'Playfair Display', serif;
+  color: #f9d85e;
 }
 
 ul {
@@ -70,36 +78,38 @@ ul {
 }
 
 input {
-  width: 80%;
-  padding: 0.5rem;
-  border-radius: 6px;
+  width: 100%;
+  padding: 0.6rem;
   border: none;
+  border-radius: 6px;
   margin-top: 1rem;
+  font-size: 1rem;
 }
 
 button {
   margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #e0b84f;
+  color: black;
+  cursor: pointer;
+}
+button:hover {
+  background-color: gold;
 }
 
 .mapa-link {
-  color: gold;
+  display: inline-block;
+  margin-top: 0.5rem;
+  color: #ffd700;
   text-decoration: none;
   font-weight: bold;
-  display: block;
-  margin-top: 0.5rem;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@media (max-width: 600px) {
-  .entrada h1 {
-    font-size: 1.8rem;
-  }
-
-  input {
-    width: 90%;
-  }
+/* Animaciones GSAP */
+.scroll {
+  opacity: 0;
+  transform: translateY(40px);
 }
