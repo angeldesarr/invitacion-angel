@@ -62,11 +62,12 @@ body {
 
 section {
   margin-bottom: 4rem;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.03); /* Menos opaco */
+  backdrop-filter: blur(8px); /* Un poco más sutil */
+  -webkit-backdrop-filter: blur(8px);
   padding: 2rem;
   border-radius: 15px;
-  box-shadow: 0 0 10px #111;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.1); /* Luz dorada suave */
 }
 
 h2, h3 {
