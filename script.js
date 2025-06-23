@@ -1,3 +1,16 @@
+// Configurar Firebase
+const firebaseConfig = {
+  apiKey: "AIzaSyCLoaImy_Az6qWMcqeN8AR6Q8YH9IvA19c",
+  authDomain: "invitaciongraduacion-29f0d.firebaseapp.com",
+  databaseURL: "https://invitaciongraduacion-29f0d-default-rtdb.firebaseio.com/",
+  projectId: "invitaciongraduacion-29f0d",
+  storageBucket: "invitaciongraduacion-29f0d.appspot.com",
+  messagingSenderId: "794213474986",
+  appId: "1:794213474986:web:6d32fabfcb1e1d2d0526d3"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
 // Fondo de partículas doradas
 particlesJS("particles-js", {
   particles: {
@@ -50,14 +63,63 @@ boton.addEventListener("click", () => {
   });
 });
 
-// Confirmar asistencia por WhatsApp
 function confirmarAsistencia() {
   const nombre = document.getElementById("nombre").value.trim();
   if (!nombre) return alert("Por favor, escribe tu nombre");
-  const msg = `Hola, soy ${nombre}. ¡Nos vemos en tu fiesta de graduación! 🎓`;
-  const link = `https://wa.me/5212218095921?text=${encodeURIComponent(msg)}`;
-  window.open(link, "_blank");
+
+  // Guarda el nombre en Firebase y espera a que termine
+  db.ref("asistentes").push({ nombre })
+    .then(() => {
+      console.log("Nombre guardado exitosamente");
+
+      // Luego redirige al WhatsApp
+      const msg = `Hola, soy ${nombre}. ¡Nos vemos en tu fiesta de graduación! 🎓`;
+      const link = `https://wa.me/5212218095921?text=${encodeURIComponent(msg)}`;
+      window.open(link, "_blank");
+    })
+    .catch(error => {
+      console.error("Error al guardar en Firebase:", error);
+      alert("Hubo un error al guardar tu nombre. Intenta de nuevo.");
+    });
 }
+
+
+function confirmarAsistencia2() {
+  db.ref("asistentes").once("value").then(snapshot => {
+    const datos = snapshot.val();
+
+    if (!datos) {
+      alert("No hay invitados confirmados todavía. confirma con tu nombre :)");
+      return;
+    }
+
+    const lista = Object.values(datos).filter(x => x.nombre && x.nombre !== "NADA");
+
+    if (lista.length === 0) {
+      alert("No hay invitados confirmados todavía. confirma con tu nombre :)");
+      return;
+    }
+
+    ajustarCanvas();
+
+    estrellas = lista.map(a => ({
+      nombre: a.nombre,
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 1.5,
+      vy: (Math.random() - 0.5) * 1.5
+    }));
+
+    if (!animacionIniciada) {
+      animacionIniciada = true;
+      animarConstelacion();
+    }
+  }).catch(error => {
+    console.error("Error al leer asistentes:", error);
+    alert("Ocurrió un error al obtener los invitados.");
+  });
+}
+
 
 // ⏳ Contador regresivo hasta el 2 de agosto a las 6:00 PM
 const fechaEvento = new Date("2025-08-02T18:00:00-06:00");
@@ -88,3 +150,98 @@ function actualizarContador() {
 
 setInterval(actualizarContador, 1000);
 actualizarContador();
+
+// 🌌 Constelación interactiva de invitados
+
+const canvas = document.getElementById("constelacion-canvas");
+const ctx = canvas.getContext("2d");
+
+function ajustarCanvas() {
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width;
+  canvas.height = rect.height;
+}
+ajustarCanvas();
+window.addEventListener("resize", ajustarCanvas);
+
+let animacionIniciada = false;
+let estrellas = [];
+// leer desde la base de datos
+db.ref("asistentes").on("value", snapshot => {
+  const datos = snapshot.val() || {};
+  const lista = Object.values(datos);
+
+  ajustarCanvas();
+
+  // Mapa para estrellas actuales por nombre
+  const mapaEstrellas = {};
+  estrellas.forEach(e => {
+    mapaEstrellas[e.nombre] = e;
+  });
+
+  const nuevasEstrellas = [];
+
+  lista.forEach(a => {
+    if (mapaEstrellas[a.nombre]) {
+      nuevasEstrellas.push(mapaEstrellas[a.nombre]);
+    } else {
+      nuevasEstrellas.push({
+        nombre: a.nombre,
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 1.5,
+        vy: (Math.random() - 0.5) * 1.5
+      });
+    }
+  });
+
+  estrellas = nuevasEstrellas;
+
+  if (!animacionIniciada) {
+    animacionIniciada = true;
+    animarConstelacion();
+  }
+});
+
+function animarConstelacion() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  estrellas.forEach(e => {
+    // Mover estrella
+    e.x += e.vx;
+    e.y += e.vy;
+
+    // Rebotar contra los bordes del canvas
+    if (e.x < 0 || e.x > canvas.width) e.vx *= -1;
+    if (e.y < 0 || e.y > canvas.height) e.vy *= -1;
+
+    // Dibujar estrella
+    ctx.beginPath();
+    ctx.arc(e.x, e.y, 4, 0, 2 * Math.PI);
+    ctx.fillStyle = "#FFD700";
+    ctx.fill();
+
+    // Dibujar nombre
+    ctx.font = "13px Montserrat";
+    ctx.fillStyle = "#fff";
+    ctx.fillText(e.nombre, e.x + 6, e.y - 6);
+  });
+
+  // Dibujar conexiones entre estrellas cercanas
+  for (let i = 0; i < estrellas.length; i++) {
+    for (let j = i + 1; j < estrellas.length; j++) {
+      const dx = estrellas[i].x - estrellas[j].x;
+      const dy = estrellas[i].y - estrellas[j].y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < 150) {
+        ctx.beginPath();
+        ctx.moveTo(estrellas[i].x, estrellas[i].y);
+        ctx.lineTo(estrellas[j].x, estrellas[j].y);
+        ctx.strokeStyle = "rgba(255, 215, 0, 0.2)";
+        ctx.stroke();
+      }
+    }
+  }
+
+  requestAnimationFrame(animarConstelacion);
+}
