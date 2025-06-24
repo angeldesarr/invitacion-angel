@@ -94,21 +94,39 @@ function confirmarAsistencia() {
     return alert("Por favor, no uses lenguaje ofensivo");
   }
 
-  // Guarda el nombre en Firebase y espera a que termine
-  db.ref("asistentes").push({ nombre })
-    .then(() => {
-      console.log("Nombre guardado exitosamente");
+  const nombreNormalizado = nombre.toLowerCase();
 
-      // Luego redirige al WhatsApp
-      const msg = `Hola, soy ${nombre}. ¡Nos vemos en tu fiesta de graduación! 🎓`;
-      const link = `https://wa.me/5212218095921?text=${encodeURIComponent(msg)}`;
-      window.open(link, "_blank");
-    })
-    .catch(error => {
-      console.error("Error al guardar en Firebase:", error);
-      alert("Hubo un error al guardar tu nombre. Intenta de nuevo.");
-    });
+  // Consultar todos los nombres en Firebase
+  db.ref("asistentes").once("value").then(snapshot => {
+    const datos = snapshot.val();
+    if (datos) {
+      const nombresExistentes = Object.values(datos).map(a => a.nombre?.toLowerCase().trim());
+      const yaExiste = nombresExistentes.includes(nombreNormalizado);
+      
+      if (yaExiste) {
+        return alert("✨ Tu nombre ya está confirmado :)");
+      }
+    }
+
+    // Si no existe, guardar el nombre
+    db.ref("asistentes").push({ nombre })
+      .then(() => {
+        console.log("Nombre guardado exitosamente");
+
+        const msg = `Hola, soy ${nombre}. ¡Nos vemos en tu fiesta de graduación! 🎓`;
+        const link = `https://wa.me/5212218095921?text=${encodeURIComponent(msg)}`;
+        window.open(link, "_blank");
+      })
+      .catch(error => {
+        console.error("Error al guardar en Firebase:", error);
+        alert("Hubo un error al guardar tu nombre. Intenta de nuevo.");
+      });
+  }).catch(error => {
+    console.error("Error al verificar nombres:", error);
+    alert("Ocurrió un error al verificar tu nombre. Intenta más tarde.");
+  });
 }
+
 
 function confirmarAsistencia2() {
   db.ref("asistentes").once("value").then(snapshot => {
