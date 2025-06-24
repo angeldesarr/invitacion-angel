@@ -270,3 +270,13 @@ function animarConstelacion() {
 
   requestAnimationFrame(animarConstelacion);
 }
+
+const videoDivertido = document.getElementById("video-divertido");
+
+videoDivertido.addEventListener("play", () => {
+  if (!musica.paused) musica.pause();
+});
+
+videoDivertido.addEventListener("ended", () => {
+  musica.play();
+});
