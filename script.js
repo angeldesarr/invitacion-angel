@@ -1,3 +1,26 @@
+// Lista de malas palabras (personalízala)
+const malasPalabras = ["p3nd3jo", "pndjo", "p3n#jo", "pendejo","pendeja",
+"ch1ng4tu", "ching4d4", "ch1ngad4", "chingatumadre", "ching@","chinga tu madre",
+"put0", "pvt0", "pvt@", "put@", "püt0", "no mames",
+"m4m0n", "mam0n", "mamón", "mam4n",
+"culer0", "culer@", "kulero", "cul0", "kul0","qlero",
+"v3rg4", "v3rga", "verga", "vrg@", "vrg4",
+"n0m4m3s", "nomames", "n0m@m3s", "no m4m3s",
+"pinche puta", "p1nch3", "pnch3", "p!nch3",
+"h1j0d3pvt4", "hijodeputa", "hijodpt4", "h1j@d3l@ch1ng4d@", "hdp", "mamador","m4m4d0r","pito", "pit0","p1t0",
+"vergu3r0", "verg4z0", "vergazo", "verga",
+"putaz0", "putazo", "putaz@", "ptz0",
+"cabron", "c4br0n", "kbron", "c@brón",
+"cul0n", "culon", "kul0n", "kvlon", "kvlo",
+"p3rr4", "perra", "p3rro", "perr@", "prr0","perro",
+"ch1n@d4", "chin4da", "chinad@", "chngad4","puto", "pvt0", "idiota", "1D10T4"
+]; 
+
+function contieneMalasPalabras(texto) {
+  texto = texto.toLowerCase();
+  return malasPalabras.some(palabra => texto.includes(palabra));
+}
+
 // Configurar Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyCLoaImy_Az6qWMcqeN8AR6Q8YH9IvA19c",
@@ -67,6 +90,10 @@ function confirmarAsistencia() {
   const nombre = document.getElementById("nombre").value.trim();
   if (!nombre) return alert("Por favor, escribe tu nombre");
 
+  if (contieneMalasPalabras(nombre)) {
+    return alert("Por favor, no uses lenguaje ofensivo");
+  }
+
   // Guarda el nombre en Firebase y espera a que termine
   db.ref("asistentes").push({ nombre })
     .then(() => {
@@ -82,7 +109,6 @@ function confirmarAsistencia() {
       alert("Hubo un error al guardar tu nombre. Intenta de nuevo.");
     });
 }
-
 
 function confirmarAsistencia2() {
   db.ref("asistentes").once("value").then(snapshot => {
@@ -119,7 +145,6 @@ function confirmarAsistencia2() {
     alert("Ocurrió un error al obtener los invitados.");
   });
 }
-
 
 // ⏳ Contador regresivo hasta el 2 de agosto a las 6:00 PM
 const fechaEvento = new Date("2025-08-02T18:00:00-06:00");
