@@ -279,3 +279,20 @@ body {
     background: rgba(0, 0, 0, 0.3);
   }
   
+  .video-section {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.aviso-humor {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  margin-bottom: 10px;
+  background: #fff3cd;
+  padding: 10px;
+  border-left: 5px solid #ffc107;
+  border-radius: 6px;
+  color: #856404;
+}
