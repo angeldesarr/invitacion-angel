@@ -116,6 +116,8 @@ function confirmarAsistencia() {
         const msg = `Hola, soy ${nombre}. ¡Nos vemos en tu fiesta de graduación! 🎓`;
         const link = `https://wa.me/5212218095921?text=${encodeURIComponent(msg)}`;
         window.open(link, "_blank");
+        // 🧼 Limpiar el input después de confirmar
+    document.getElementById("nombre").value = "";
       })
       .catch(error => {
         console.error("Error al guardar en Firebase:", error);
