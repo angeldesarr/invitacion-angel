@@ -116,7 +116,7 @@ function confirmarAsistencia() {
         const msg = `Hola, soy ${nombre}. ¡Nos vemos en tu fiesta de graduación! 🎓`;
         const link = `https://wa.me/5212218095921?text=${encodeURIComponent(msg)}`;
         window.open(link, "_blank");
-        // 🧼 Limpiar el input después de confirmar
+            // 🧼 Limpiar el input después de confirmar
     document.getElementById("nombre").value = "";
       })
       .catch(error => {
@@ -177,10 +177,22 @@ function actualizarContador() {
   const ahora = new Date();
   const diferencia = fechaEvento - ahora;
 
-  if (diferencia <= 0) {
-    document.getElementById("cuenta-regresiva").innerHTML = "🎉 ¡Ya comenzó el evento!";
-    return;
+ if (diferencia <= 0) {
+  const minutosPasados = Math.floor((ahora - fechaEvento) / (1000 * 60));
+
+  if (minutosPasados >= 60) {
+    document.getElementById("cuenta-regresiva").innerHTML = `
+      🍻 ¡Ya vas tarde, pero aún alcanzas Azulitos! ¡Apúrate! 😜
+    `;
+  } else {
+    document.getElementById("cuenta-regresiva").innerHTML = `
+      🎉 ¡Ya comenzó la fiesta!
+    `;
   }
+
+  return;
+}
+
 
   const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
   const horas = Math.floor((diferencia / (1000 * 60 * 60)) % 24);
@@ -300,3 +312,53 @@ videoDivertido.addEventListener("play", () => {
 videoDivertido.addEventListener("ended", () => {
   musica.play();
 });
+
+
+// Coordenadas del salón
+const LAT_SALON = 19.0623576;
+const LON_SALON = -98.2972204;
+// Calcula distancia entre dos puntos geográficos (en metros)
+function distanciaEnMetros(lat1, lon1, lat2, lon2) {
+  const R = 6371000; // radio de la Tierra en metros
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(lat1 * Math.PI / 180) *
+    Math.cos(lat2 * Math.PI / 180) *
+    Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return R * c;
+}
+
+function detectarUbicacion() {
+  const mensaje = document.getElementById("mensaje-ubicacion");
+
+  if (!navigator.geolocation) {
+    mensaje.textContent = "Tu navegador no permite geolocalización 😢";
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    (pos) => {
+      const lat = pos.coords.latitude;
+      const lon = pos.coords.longitude;
+      const distancia = distanciaEnMetros(lat, lon, LAT_SALON, LON_SALON);
+
+      console.log("Distancia al salón:", distancia, "metros");
+
+      if (distancia < 500) {
+        mensaje.textContent = "🎉 ¡Ya estás cerca! Ven a abrazarme 😄";
+      } else {
+        mensaje.textContent = "🕒 ¿A qué hora llegas? Te estamos esperando!";
+      }
+    },
+    (error) => {
+      mensaje.textContent = "No se pudo obtener tu ubicación por los permisos de ubicacion 🧭";
+      console.error(error);
+    }
+  );
+}
+
+// Ejecutar al cargar
+detectarUbicacion();
