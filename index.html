@@ -38,6 +38,16 @@
     <img src="img/la carreta2.webp" alt="Foto 2">
    </div>
 </section>
+
+<section class="proximidad scroll">
+  <h3 id="mensaje-proximidad">📍 Verificando tu ubicación...</h3><button onclick="detectarUbicacion()" class="btn-ubicacion">
+  Pulsame para ubicarte 👀
+</button>
+<small style="display:block; margin-top:5px; color: #ccc;">
+  Si no se pudo obtener tu ubicacion, obten el permiso con el boton de arriba.
+</small>
+</section>
+    
     <section class="detalles scroll">
       <h3>📍 Detalles del evento</h3>
       <ul>
@@ -60,17 +70,7 @@
   src="https://maps.google.com/maps?q=19.0623576,-98.2972204&z=15&output=embed">
 </iframe>
     </section>
-
-<section class="proximidad scroll">
-  <h3 id="mensaje-proximidad">📍 Verificando tu ubicación...</h3><button onclick="detectarUbicacion()" class="btn-ubicacion">
-  Pulsame para ubicarte 👀
-</button>
-<small style="display:block; margin-top:5px; color: #ccc;">
-  Si no se pudo obtener tu ubicacion, obten el permiso con el boton de arriba.
-</small>
-</section>
-
-
+    
 <section class="contador scroll">
   <h2 class="contador-titulo">⏳ Faltan...</h2>
   <div id="cuenta-regresiva" class="contador-caja">
