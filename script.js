@@ -465,5 +465,3 @@ function detectarUbicacion() {
   );
 }
 
-// Ejecutar al cargar
-detectarUbicacion();
