@@ -6,20 +6,30 @@ if ('Notification' in window && Notification.permission !== 'granted') {
 }
 
 function notificar(mensajeTexto) {
-  if (!('Notification' in window)) return;
-  if (mensajeTexto === ultimoMensajeNotificado) return;
+  console.log("🔔 Entró a notificar()", mensajeTexto);
+
+  if (!('Notification' in window)) {
+    console.log("❌ El navegador no soporta notificaciones");
+    return;
+  }
+
+  if (mensajeTexto === ultimoMensajeNotificado) {
+    console.log("🟡 Mismo mensaje que antes, no se vuelve a notificar");
+    return;
+  }
 
   ultimoMensajeNotificado = mensajeTexto;
 
   if (Notification.permission === 'granted') {
+    console.log("✅ Permiso concedido, mostrando notificación");
     new Notification("🎓 Ubicación para la graduación", {
       body: mensajeTexto,
       icon: "https://cdn-icons-png.flaticon.com/512/1170/1170678.png"
     });
+  } else {
+    console.log("🚫 Permiso de notificación no concedido aún");
   }
 }
-
-
 
 // Lista de malas palabras (personalízala)
 const malasPalabras = ["p3nd3jo", "pndjo", "p3n#jo", "pendejo","pendeja",
