@@ -22,7 +22,7 @@ function notificar(mensajeTexto) {
 
   if (Notification.permission === 'granted') {
     console.log("✅ Permiso concedido, mostrando notificación");
-    new Notification("🎓 Ubicación para la graduación", {
+    new Notification("🎓 Invitacion de Angel", {
       body: mensajeTexto,
       icon: "https://cdn-icons-png.flaticon.com/512/1170/1170678.png"
     });
