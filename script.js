@@ -101,7 +101,9 @@ boton.addEventListener("click", () => {
   musica.play();
   document.querySelector(".entrada").style.display = "none";
   document.querySelector(".contenido").classList.add("visible");
-
+  
+detectarUbicacion(); 
+  
   // Animar secciones con GSAP
   gsap.utils.toArray(".scroll").forEach(section => {
     gsap.fromTo(section, 
