@@ -1,3 +1,26 @@
+let ultimoMensajeNotificado = "";
+
+// Solicitar permiso de notificación al cargar
+if ('Notification' in window && Notification.permission !== 'granted') {
+  Notification.requestPermission();
+}
+
+function notificar(mensajeTexto) {
+  if (!('Notification' in window)) return;
+  if (mensajeTexto === ultimoMensajeNotificado) return;
+
+  ultimoMensajeNotificado = mensajeTexto;
+
+  if (Notification.permission === 'granted') {
+    new Notification("🎓 Ubicación para la graduación", {
+      body: mensajeTexto,
+      icon: "https://cdn-icons-png.flaticon.com/512/1170/1170678.png"
+    });
+  }
+}
+
+
+
 // Lista de malas palabras (personalízala)
 const malasPalabras = ["p3nd3jo", "pndjo", "p3n#jo", "pendejo","pendeja",
 "ch1ng4tu", "ching4d4", "ch1ngad4", "chingatumadre", "ching@","chinga tu madre",
@@ -333,9 +356,14 @@ function distanciaEnMetros(lat1, lon1, lat2, lon2) {
 
 function detectarUbicacion() {
   const mensaje = document.getElementById("mensaje-proximidad");
+  const fechaEvento = new Date("2025-08-02T18:00:00-06:00");
+  const LAT_SALON = 19.28843443696405;
+  const LON_SALON = -99.65364864643407;
 
   if (!navigator.geolocation) {
-    mensaje.textContent = "❌ Tu navegador no permite geolocalización 😢";
+    const texto = "❌ Tu navegador no permite geolocalización 😢";
+    mensaje.textContent = texto;
+    notificar(texto);
     return;
   }
 
@@ -348,120 +376,92 @@ function detectarUbicacion() {
       const diferencia = fechaEvento - ahora;
       const minutosPasados = Math.floor((ahora - fechaEvento) / (1000 * 60));
       const diasAntes = diferencia > 0;
+      let texto = "";
 
-      console.log("Distancia al salón:", distancia, "metros");
+      if (diasAntes) {
+        texto = "⏳ Aún hay tiempo, la fiesta todavía no comienza...";
+      } else {
+        if (minutosPasados <= 30) {
+          if (distancia < 100) {
+            texto = `🎉 ¡Ya llegaste justo a tiempo! Ven a abrazarme 😄 Estás a ${Math.round(distancia)} metros.`;
+          } else if (distancia < 300) {
+            texto = `🚶‍♂️ ¡Genial! ya casi llegas, justo a tiempo 🎊 Estás a ${Math.round(distancia)} metros.`;
+          } else if (distancia < 700) {
+            texto = `📍 ¡Estás cerca! Apresúrate que ya empezó 🎉 Estás a ${Math.round(distancia)} metros.`;
+          } else if (distancia < 1500) {
+            texto = `🛣️ Vas a la mitad, aún llegas con estilo 😎 Estás a ${Math.round(distancia)} metros.`;
+          } else if (distancia < 3000) {
+            texto = `🕒 ¿A qué hora llegas? Te estamos esperando! Estás a ${Math.round(distancia)} metros.`;
+          } else {
+            texto = `🗺️ ¿Te perdiste? ¡La fiesta ya empezó! Estás a ${Math.round(distancia)} metros.`;
+          }
+        } else if (minutosPasados <= 60) {
+          if (distancia < 100) {
+            texto = `🎉 ¡llegaste! Ven a abrazarme Estás a ${Math.round(distancia)} metros.`;
+          } else if (distancia < 300) {
+            texto = `😅 Más vale tarde que nunca, ya casi llegas Estás a ${Math.round(distancia)} metros.`;
+          } else if (distancia < 700) {
+            texto = `📍 Ya casi, pero apúrate, ¡se están acabando los azulitos! Estás a ${Math.round(distancia)} metros.`;
+          } else if (distancia < 1500) {
+            texto = `🚗 ¡Vamos! Ya pasó una hora, pero aún hay fiesta! Estás a ${Math.round(distancia)} metros.`;
+          } else if (distancia < 3000) {
+            texto = `⏰ Ya pasó una hora y sigues lejos, apúrate 🏃‍♂️ Estás a ${Math.round(distancia)} metros.`;
+          } else {
+            texto = `🗺️ ¡Sigue el mapa! Aquí seguimos esperándote 🎈 Estás a ${Math.round(distancia)} metros.`;
+          }
+        } else if (minutosPasados <= 120) {
+          if (distancia < 100) {
+            texto = `🍸 ¡Bien! Llegaste tarde pero alcanzaste los azulitos! Estás a ${Math.round(distancia)} metros.`;
+          } else if (distancia < 300) {
+            texto = `🍸 Ya casi llegas, todavía alcanzas los azulitos! Estás a ${Math.round(distancia)} metros.`;
+          } else if (distancia < 700) {
+            texto = `🍹 Estás cerca, corre que ya comenzó lo bueno! Estás a ${Math.round(distancia)} metros.`;
+          } else if (distancia < 1500) {
+            texto = `🚗 Ya llevas 2 horas de retraso, ¡apurate! Estás a ${Math.round(distancia)} metros.`;
+          } else if (distancia < 3000) {
+            texto = `📍 Estás lejos, pero si te apuras aún llegas a brindar! Estás a ${Math.round(distancia)} metros.`;
+          } else {
+            texto = `🗺️ ¿A poco ya te rendiste? ¡Aquí seguimos celebrando! Estás a ${Math.round(distancia)} metros.`;
+          }
+        } else if (minutosPasados <= 180) {
+          if (distancia < 100) {
+            texto = `😎 ¡llegaste con 3 horas de retraso! Pero aún hay alcohol 🥳 Estás a ${Math.round(distancia)} metros.`;
+          } else if (distancia < 300) {
+            texto = `😎 Si llegas, te falta nada Estás a ${Math.round(distancia)} metros.`;
+          } else if (distancia < 700) {
+            texto = `🍺 Estás cerca, ¡ven la fiesta se puso buena! Estás a ${Math.round(distancia)} metros.`;
+          } else if (distancia < 1500) {
+            texto = `🚗 ¡Corre! Todavía alcanzas el final del cumbión 🕺 Estás a ${Math.round(distancia)} metros.`;
+          } else if (distancia < 3000) {
+            texto = `🕳️ ¿Te perdiste? ¡Aquí seguimos enfiestados, no tardes! Estás a ${Math.round(distancia)} metros.`;
+          } else {
+            texto = `🥴 La fiesta esta en lo mero bueno y tú lejos, apúrale Estás a ${Math.round(distancia)} metros.`;
+          }
+        } else {
+          if (distancia < 100) {
+            texto = `🎉 ¡Ya llegaste! Aunque un poquito tarde Bienvenido 😅 Estás a ${Math.round(distancia)} metros.`;
+          } else if (distancia < 300) {
+            texto = `🥳 Llegaste tarde... pero el abrazo sigue en pie 😄 Estás a ${Math.round(distancia)} metros.`;
+          } else if (distancia < 700) {
+            texto = `🎶 Ya casi llegas, ¡aún hay música y risas! Estás a ${Math.round(distancia)} metros.`;
+          } else if (distancia < 1500) {
+            texto = `🚕 ¡Tarde pero seguro! Dale que todavía hay recuerdos por crear. Estás a ${Math.round(distancia)} metros.`;
+          } else if (distancia < 3000) {
+            texto = `🥴 ¡Se te fue la fiesta! Pero si llegas, aún hay comida 🎵 Estás a ${Math.round(distancia)} metros.`;
+          } else {
+            texto = `🧭 La fiesta ya lleva rato, pero aquí seguimos, ¡conduce con cuidado! ❤️ Estás a ${Math.round(distancia)} metros.`;
+          }
+        }
+      }
 
-     if (diasAntes) {
-  mensaje.textContent = "⏳ Aún hay tiempo, la fiesta todavía no comienza...";
-} else {
-  // Evento ya empezó
-  if (minutosPasados <= 30) {
-    if (distancia < 100) {
-      mensaje.textContent = "🎉 ¡Ya llegaste justo a tiempo! Ven a abrazarme 😄";
-      mensaje.textContent += ` Estás a ${Math.round(distancia)} metros.`;
-    } else if (distancia < 300) {
-      mensaje.textContent = "🚶‍♂️ ¡Genial! ya casi llegas, justo a tiempo 🎊";
-      mensaje.textContent += ` Estás a ${Math.round(distancia)} metros.`;
-    } else if (distancia < 700) {
-      mensaje.textContent = "📍 ¡Estás cerca! Apresúrate que ya empezó 🎉";
-      mensaje.textContent += ` Estás a ${Math.round(distancia)} metros.`;
-    } else if (distancia < 1500) {
-      mensaje.textContent = "🛣️ Vas a la mitad, aún llegas con estilo 😎";
-      mensaje.textContent += ` Estás a ${Math.round(distancia)} metros.`;
-    } else if (distancia < 3000) {
-      mensaje.textContent = "🕒 ¿A qué hora llegas? Te estamos esperando!";
-      mensaje.textContent += ` Estás a ${Math.round(distancia)} metros.`;
-    } else {
-      mensaje.textContent = "🗺️ ¿Te perdiste? ¡La fiesta ya empezó!";
-      mensaje.textContent += ` Estás a ${Math.round(distancia)} metros.`;
-    }
-  } else if (minutosPasados <= 60) {
-    if (distancia < 100) {
-      mensaje.textContent = "🎉 ¡llegaste! Ven a abrazarme";
-      mensaje.textContent += ` Estás a ${Math.round(distancia)} metros.`;
-    } else if (distancia < 300) {
-      mensaje.textContent = "😅 Más vale tarde que nunca, ya casi llegas";
-      mensaje.textContent += ` Estás a ${Math.round(distancia)} metros.`;
-    } else if (distancia < 700) {
-      mensaje.textContent = "📍 Ya casi, pero apúrate, ¡se están acabando los azulitos!";
-      mensaje.textContent += ` Estás a ${Math.round(distancia)} metros.`;
-    } else if (distancia < 1500) {
-      mensaje.textContent = "🚗 ¡Vamos! Ya pasó una hora, pero aún hay fiesta!";
-      mensaje.textContent += ` Estás a ${Math.round(distancia)} metros.`;
-    } else if (distancia < 3000) {
-      mensaje.textContent = "⏰ Ya pasó una hora y sigues lejos, apúrate 🏃‍♂️";
-      mensaje.textContent += ` Estás a ${Math.round(distancia)} metros.`;
-    } else {
-      mensaje.textContent = "🗺️ ¡Sigue el mapa! Aquí seguimos esperándote 🎈";
-      mensaje.textContent += ` Estás a ${Math.round(distancia)} metros.`;
-    }
-  } else if (minutosPasados <= 120) {
-    if (distancia < 100) {
-      mensaje.textContent = "🍸 ¡Bien! Llegaste tarde pero alcanzaste los azulitos!";
-      mensaje.textContent += ` Estás a ${Math.round(distancia)} metros.`;
-    } else if (distancia < 300) {
-      mensaje.textContent = "🍸 Ya casi llegas, todavía alcanzas los azulitos!";
-      mensaje.textContent += ` Estás a ${Math.round(distancia)} metros.`;
-    } else if (distancia < 700) {
-      mensaje.textContent = "🍹 Estás cerca, corre que ya comenzó lo bueno!";
-      mensaje.textContent += ` Estás a ${Math.round(distancia)} metros.`;
-    } else if (distancia < 1500) {
-      mensaje.textContent = "🚗 Ya llevas 2 horas de retraso, ¡apurate!";
-      mensaje.textContent += ` Estás a ${Math.round(distancia)} metros.`;
-    } else if (distancia < 3000) {
-      mensaje.textContent = "📍 Estás lejos, pero si te apuras aún llegas a brindar!";
-      mensaje.textContent += ` Estás a ${Math.round(distancia)} metros.`;
-    } else {
-      mensaje.textContent = "🗺️ ¿A poco ya te rendiste? ¡Aquí seguimos celebrando!";
-      mensaje.textContent += ` Estás a ${Math.round(distancia)} metros.`;
-    }
-  } else if (minutosPasados <= 180) {
-    if (distancia < 100) {
-      mensaje.textContent = "😎 ¡llegaste Con 3 horas de retraso! Pero aún hay alcohol 🥳";
-      mensaje.textContent += ` Estás a ${Math.round(distancia)} metros.`;
-    } else if (distancia < 300) {
-      mensaje.textContent = "😎 si llegas, te falta nada";
-      mensaje.textContent += ` Estás a ${Math.round(distancia)} metros.`;
-    } else if (distancia < 700) {
-      mensaje.textContent = "🍺 Estás cerca, ¡ven la fiesta se puso buena!";
-      mensaje.textContent += ` Estás a ${Math.round(distancia)} metros.`;
-    } else if (distancia < 1500) {
-      mensaje.textContent = "🚗 ¡Corre! Todavía alcanzas el final del cumbión 🕺";
-      mensaje.textContent += ` Estás a ${Math.round(distancia)} metros.`;
-    } else if (distancia < 3000) {
-      mensaje.textContent = "🕳️ ¿Te perdiste? ¡Aquí seguimos enfiestados, no tardes!";
-      mensaje.textContent += ` Estás a ${Math.round(distancia)} metros.`;
-    } else {
-      mensaje.textContent = "🥴 La fiesta esta en lo mero bueno y tu lejos apurale";
-      mensaje.textContent += ` Estás a ${Math.round(distancia)} metros.`;
-    }
-  } else {
-    if (distancia < 100) {
-      mensaje.textContent = "🎉 ¡Ya llegaste! Aunque un poquito tarde Bienvenido 😅";
-      mensaje.textContent += ` Estás a ${Math.round(distancia)} metros.`;
-    } else if (distancia < 300) {
-      mensaje.textContent = "🥳 Llegaste tarde... pero el abrazo sigue en pie 😄";
-      mensaje.textContent += ` Estás a ${Math.round(distancia)} metros.`;
-    } else if (distancia < 700) {
-      mensaje.textContent = "🎶 Ya casi llegas, ¡aún hay música y risas!";
-      mensaje.textContent += ` Estás a ${Math.round(distancia)} metros.`;
-    } else if (distancia < 1500) {
-      mensaje.textContent = "🚕 ¡Tarde pero seguro! Dale que todavía hay recuerdos por crear.";
-      mensaje.textContent += ` Estás a ${Math.round(distancia)} metros.`;
-    } else if (distancia < 3000) {
-      mensaje.textContent = "🥴 ¡Se te fue la fiesta! Pero si llegas, aún hay comida 🎵";
-      mensaje.textContent += ` Estás a ${Math.round(distancia)} metros.`;
-    } else {
-      mensaje.textContent = "🧭 La fiesta ya lleva rato, pero aquí seguimos dale, !conduce con cuidado¡ ❤️";
-      mensaje.textContent += ` Estás a ${Math.round(distancia)} metros.`;
-    }
-  }
-}
+      mensaje.textContent = texto;
+      notificar(texto);
     },
     (error) => {
-      mensaje.textContent = "❗ No se pudo obtener tu ubicación. Activa permisos 🧭";
+      const texto = "❗ No se pudo obtener tu ubicación. Activa permisos 🧭";
+      mensaje.textContent = texto;
+      notificar(texto);
       console.error(error);
     }
   );
 }
-
