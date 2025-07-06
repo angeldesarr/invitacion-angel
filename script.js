@@ -93,18 +93,34 @@ new Typed("#typed-text", {
 });
 
 // Mostrar contenido + iniciar música
-const boton = document.getElementById("btn-ver");
+const canciones = [
+  // 🎶 Lista de canciones
+  "audio/unstoppable.mp3",
+  "audio/warriors.mp3",
+  "audio/whateverittakes.mp3",
+  "audio/run.mp3"
+];
+
+// 🎲 Elegir canción inicial aleatoria
+let indiceInicial = Math.floor(Math.random() * canciones.length);
+let indiceActual = indiceInicial;
+
+// ⏯️ Referencia al elemento <audio>
 const musica = document.getElementById("bg-music");
+musica.volume = 0.4;
+musica.src = canciones[indiceActual];
+
+
+const boton = document.getElementById("btn-ver");
 
 boton.addEventListener("click", () => {
-  musica.volume = 0.4;
-  musica.play();
+  musica.play().catch(e => console.warn("🎵 Error al reproducir:", e));
+
   document.querySelector(".entrada").style.display = "none";
   document.querySelector(".contenido").classList.add("visible");
-  
-detectarUbicacion(); 
-  
-  // Animar secciones con GSAP
+
+  detectarUbicacion();
+
   gsap.utils.toArray(".scroll").forEach(section => {
     gsap.fromTo(section, 
       { opacity: 0, y: 40 }, 
@@ -120,6 +136,17 @@ detectarUbicacion();
     );
   });
 });
+
+
+// ⏭️ Al terminar la canción, avanzar a la siguiente circularmente
+musica.addEventListener("ended", () => {
+  indiceActual = (indiceActual + 1) % canciones.length;
+  musica.src = canciones[indiceActual];
+  musica.load();
+  musica.play();
+});
+
+
 
 function confirmarAsistencia() {
   const nombre = document.getElementById("nombre").value.trim();
@@ -156,13 +183,14 @@ function confirmarAsistencia() {
       })
       .catch(error => {
         console.error("Error al guardar en Firebase:", error);
-        alert("Tu nombre y apellido son largos. intenta solo con tu nombre");
+        alert("Tu nombre y apellido son muy largos. intenta solo con tu nombre.");
       });
   }).catch(error => {
     console.error("Error al verificar nombres:", error);
     alert("Ocurrió un error al verificar tu nombre. Intenta más tarde.");
   });
 }
+
 
 function confirmarAsistencia2() {
   db.ref("asistentes").once("value").then(snapshot => {
@@ -226,6 +254,7 @@ function actualizarContador() {
 
   return;
 }
+
 
   const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
   const horas = Math.floor((diferencia / (1000 * 60 * 60)) % 24);
