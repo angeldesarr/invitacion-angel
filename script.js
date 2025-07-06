@@ -24,7 +24,7 @@ function notificar(mensajeTexto) {
     console.log("✅ Permiso concedido, mostrando notificación");
     new Notification("🎓 Invitacion de Angel", {
       body: mensajeTexto,
-      icon: "https://cdn-icons-png.flaticon.com/512/1170/1170678.png"
+      icon: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png" 
     });
   } else {
     console.log("🚫 Permiso de notificación no concedido aún");
