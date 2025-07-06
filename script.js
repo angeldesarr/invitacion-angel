@@ -156,7 +156,7 @@ function confirmarAsistencia() {
       })
       .catch(error => {
         console.error("Error al guardar en Firebase:", error);
-        alert("Hubo un error al guardar tu nombre. Intenta de nuevo.");
+        alert("Tu nombre y apellido son largos. intenta solo con tu nombre");
       });
   }).catch(error => {
     console.error("Error al verificar nombres:", error);
