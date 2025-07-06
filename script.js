@@ -164,7 +164,6 @@ function confirmarAsistencia() {
   });
 }
 
-
 function confirmarAsistencia2() {
   db.ref("asistentes").once("value").then(snapshot => {
     const datos = snapshot.val();
@@ -227,7 +226,6 @@ function actualizarContador() {
 
   return;
 }
-
 
   const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
   const horas = Math.floor((diferencia / (1000 * 60 * 60)) % 24);
