@@ -295,6 +295,26 @@ db.ref("asistentes").on("value", snapshot => {
   }
 });
 
+
+function dibujarEstrella(ctx, x, y, radio, puntas, radioInterno, color) {
+  const paso = Math.PI / puntas;
+
+  ctx.beginPath();
+  ctx.moveTo(x, y - radio);
+  for (let i = 0; i < 2 * puntas; i++) {
+    const r = (i % 2 === 0) ? radio : radioInterno;
+    const a = i * paso;
+    ctx.lineTo(x + r * Math.sin(a), y - r * Math.cos(a));
+  }
+  ctx.closePath();
+  ctx.fillStyle = color;
+  ctx.shadowColor = "rgba(255, 223, 80, 0.8)";
+  ctx.shadowBlur = 15;
+  ctx.fill();
+}
+
+
+
 function animarConstelacion() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -308,11 +328,8 @@ function animarConstelacion() {
     if (e.y < 0 || e.y > canvas.height) e.vy *= -1;
 
     // Dibujar estrella
-    ctx.beginPath();
-    ctx.arc(e.x, e.y, 4, 0, 2 * Math.PI);
-    ctx.fillStyle = "#FFD700";
-    ctx.fill();
-
+    dibujarEstrella(ctx, e.x, e.y, 6, 5, 2.5, "#FFD700");
+    
     // Dibujar nombre
     ctx.font = "13px Montserrat";
     ctx.fillStyle = "#fff";
