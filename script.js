@@ -308,8 +308,8 @@ function dibujarEstrella(ctx, x, y, radio, puntas, radioInterno, color) {
   }
   ctx.closePath();
   ctx.fillStyle = color;
-  ctx.shadowColor = "rgba(255, 223, 80, 0.8)";
-  ctx.shadowBlur = 15;
+  //ctx.shadowColor = "rgba(255, 223, 80, 0.8)";
+  //ctx.shadowBlur = 15;
   ctx.fill();
 }
 
