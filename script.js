@@ -137,7 +137,6 @@ boton.addEventListener("click", () => {
   });
 });
 
-
 // ⏭️ Al terminar la canción, avanzar a la siguiente circularmente
 musica.addEventListener("ended", () => {
   indiceActual = (indiceActual + 1) % canciones.length;
