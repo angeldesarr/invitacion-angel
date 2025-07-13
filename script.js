@@ -137,6 +137,7 @@ boton.addEventListener("click", () => {
   });
 });
 
+
 // ⏭️ Al terminar la canción, avanzar a la siguiente circularmente
 musica.addEventListener("ended", () => {
   indiceActual = (indiceActual + 1) % canciones.length;
@@ -181,11 +182,8 @@ function confirmarAsistencia() {
     document.getElementById("nombre").value = "";
       })
       .catch(error => {
-         console.error("Error al guardar en Firebase:", error);
-  if (nombre.length > 20) {
-    alert("Tu nombre y apellido son muy largos. Intenta solo con tu nombre.");
-  } else {
-    alert("Ocurrió un error al guardar tu nombre. Intenta más tarde.");
+        console.error("Error al guardar en Firebase:", error);
+        alert("Tu nombre y apellido son muy largos. intenta solo con tu nombre.");
       });
   }).catch(error => {
     console.error("Error al verificar nombres:", error);
