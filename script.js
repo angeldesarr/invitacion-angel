@@ -31,7 +31,7 @@ function notificar(mensajeTexto) {
   }
 }
 
-// Lista de malas palabras (personalízala)
+// Lista de malas palabras
 const malasPalabras = ["p3nd3jo", "pndjo", "p3n#jo", "pendejo","pendeja",
 "ch1ng4tu", "ching4d4", "ch1ngad4", "chingatumadre", "ching@","chinga tu madre",
 "put0", "pvt0", "pvt@", "put@", "püt0", "no mames",
@@ -150,46 +150,67 @@ musica.addEventListener("ended", () => {
 
 function confirmarAsistencia() {
   const nombre = document.getElementById("nombre").value.trim();
-  if (!nombre) return alert("Por favor, escribe tu nombre");
+
+  if (!nombre) {
+    alert("Por favor, escribe tu nombre");
+    return;
+  }
+
+  // ✅ Validar máximo 19 letras SIN contar espacios
+  if (nombre.replace(/\s+/g, "").length > 19) {
+    alert("Tu nombre es muy largo. Usa un máximo de 19 letras sin contar espacios.");
+    return;
+  }
 
   if (contieneMalasPalabras(nombre)) {
-    return alert("Por favor, no uses lenguaje ofensivo");
+    alert("Por favor, no uses lenguaje ofensivo");
+    return;
   }
 
   const nombreNormalizado = nombre.toLowerCase();
 
-  // Consultar todos los nombres en Firebase
   db.ref("asistentes").once("value").then(snapshot => {
     const datos = snapshot.val();
+
     if (datos) {
       const nombresExistentes = Object.values(datos).map(a => a.nombre?.toLowerCase().trim());
       const yaExiste = nombresExistentes.includes(nombreNormalizado);
-      
+
       if (yaExiste) {
-        return alert("✨ Tu nombre ya está confirmado :)");
+        alert("✨ Tu nombre ya está confirmado :)");
+        return;
       }
     }
 
-    // Si no existe, guardar el nombre
     db.ref("asistentes").push({ nombre })
       .then(() => {
-        console.log("Nombre guardado exitosamente");
+        console.log("✅ Nombre guardado exitosamente");
 
         const msg = `Hola, soy ${nombre}. ¡Nos vemos en tu fiesta de graduación! 🎓`;
         const link = `https://wa.me/5212218095921?text=${encodeURIComponent(msg)}`;
         window.open(link, "_blank");
-            // 🧼 Limpiar el input después de confirmar
-    document.getElementById("nombre").value = "";
+        document.getElementById("nombre").value = "";
       })
       .catch(error => {
-        console.error("Error al guardar en Firebase:", error);
-        alert("Tu nombre y apellido son muy largos. intenta solo con tu nombre.");
+        console.error("❌ Error al guardar en Firebase:", error);
+
+        const ahora = new Date();
+        const limite = new Date("2025-08-07T23:59:59");
+
+        if (ahora > limite) {
+          alert("⏳ El tiempo para confirmar ya terminó. ¡Gracias por tu interés!");
+        } else {
+          alert("Ocurrió un error al guardar tu nombre. Intenta más tarde o revisa tu conexión.");
+        }
       });
+
   }).catch(error => {
-    console.error("Error al verificar nombres:", error);
+    console.error("❌ Error al verificar nombres:", error);
     alert("Ocurrió un error al verificar tu nombre. Intenta más tarde.");
   });
 }
+
+
 
 
 function confirmarAsistencia2() {
